@@ -39,10 +39,11 @@ ship website changes. A changed npm release needs a new version.
 | `scripts/build-site.mjs` | Prepare public downloads and license notices |
 | `out/` | Generated Next.js static export; do not commit |
 
-The visual identity uses black surfaces, green for recorded work and blue for
-the next session. `app/identity.css` holds the theme and responsive bridge
-layout. The hero shows illustrative handoff activity, never a live connection
-or client verification claim.
+The visual identity uses a quiet black background with green and blue accents.
+`app/identity.css` defines the responsive editorial layout: a serif introduction,
+a readable example handoff, open feature rows and a simple four-step workflow.
+The handoff is illustrative, not a live connection or client verification claim.
+Landing-page copy and the handoff example are in `site/src/content.js`.
 
 Tailwind CSS is processed through PostCSS; Framer Motion handles interaction
 transitions. Fonts use system sans-serif and monospace stacks, with no font

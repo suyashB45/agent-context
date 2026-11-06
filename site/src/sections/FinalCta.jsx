@@ -8,7 +8,6 @@ export function FinalCta() {
     <section className="lp-final-section" id="get-started">
       <div className="container">
         <Reveal className="lp-final-cta">
-          <span className="lp-final-glow" aria-hidden="true" />
           <p className="lp-overline">{finalCtaContent.overline}</p>
           <h2>{finalCtaContent.title}</h2>
           <p className="lp-lead">{finalCtaContent.description}</p>

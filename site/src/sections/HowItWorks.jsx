@@ -1,6 +1,5 @@
 import React from 'react';
 import { howItWorksContent } from '../content.js';
-import { Icon } from '../components/icons.jsx';
 import { Reveal, SectionHeading } from '../components/ui.jsx';
 
 export function HowItWorks() {
@@ -14,13 +13,9 @@ export function HowItWorks() {
           description={howItWorksContent.description}
         />
         <div className="lp-steps">
-          <span className="lp-steps-line" aria-hidden="true" />
           {howItWorksContent.steps.map((step, index) => (
             <Reveal key={step.number} className="lp-step" delay={index * 0.07}>
               <span className="lp-step-number">{step.number}</span>
-              <span className="lp-step-icon">
-                <Icon name={step.icon} size={21} />
-              </span>
               <h3>{step.title}</h3>
               <p>{step.description}</p>
               <code>{step.command}</code>

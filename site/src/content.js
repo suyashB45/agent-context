@@ -14,7 +14,7 @@ export const landingMeta = {
   ogTitle: 'Agent Context — Shared memory for your coding agents',
   ogDescription:
     'One agent records the work; the next reads the context before continuing. Open-source project memory for MCP-compatible coding agents.',
-  themeColor: '#05070b',
+  themeColor: '#0d100f',
 };
 
 export const uiText = {
@@ -50,7 +50,7 @@ export const uiText = {
 
 export const siteBrand = {
   name: 'Agent Context',
-  wordmark: { lead: 'agent', thin: 'context' },
+  wordmark: { lead: 'Agent', thin: ' Context' },
   version: config.version,
   releaseLabel: `v${config.version} · early release`,
   tagline:
@@ -82,49 +82,29 @@ export const heroContent = {
   badges: ['MCP compatible', 'Local-first', 'MIT license', 'SQLite'],
   footnote: 'Node.js 24+ and npm required. No Python, cloud model or model API key.',
   install: { command: `npm install -g ${config.packageName}`, label: 'Install from npm', href: npmUrl },
-  bridge: {
-    title: 'A shared thread between sessions',
-    project: 'project / launchpad',
-    label: 'Illustrative agent handoff using a shared local project record',
-    coreTitle: 'Agent Context',
-    coreLabel: 'Shared project memory',
-    coreTags: ['Context', 'Decisions', 'Handoffs'],
-    storage: 'Your computer or team server · SQLite',
-    console: 'Handoff activity',
-    agents: [
-      { id: 'A', label: 'Agent A', role: 'Finishing a session', command: 'record_update', state: 'Handoff recorded', items: ['Decisions and changed files', 'Test results and next steps'] },
-      { id: 'B', label: 'Agent B', role: 'Starting the next session', command: 'get_context', state: 'Context available', items: ['Read project memory', 'Claim the next task'] },
+  note: {
+    heading: 'A handoff the next agent can read.',
+    filename: 'handoff / launchpad',
+    from: 'Recorded by agent-a',
+    to: 'Read by agent-b',
+    sections: [
+      { label: 'Where I stopped', text: 'Session validation is ready for review. The next step is connecting the login screen.' },
+      { label: 'What to check', text: 'Read the recorded decisions and test report before editing.' },
+      { label: 'Pick up here', text: 'Claim the login screen task. Record your changes and leave the next handoff.' },
     ],
-    clientLabel: 'Connect the tools you already use',
-    clients: ['Claude Code', 'Codex', 'Cursor', 'VS Code / Copilot', 'Gemini CLI', 'Other MCP clients'],
+    read: 'get_context(project_id="launchpad")',
+    caption: 'Example data. Agents write these records; conversations are not captured automatically.',
   },
-  terminal: {
-    windowTitle: 'launchpad / shared context',
-    protocol: 'stdio + Streamable HTTP',
-    lines: [
-      { tone: 'cmd', text: '$ agent-context' },
-      { tone: 'meta', text: 'local service ready · 127.0.0.1:8765' },
-      { tone: 'agent', text: 'agent-a  record_update(kind="handoff")' },
-      { tone: 'ok', text: 'handoff saved · decisions, files, test report' },
-      { tone: 'agent', text: 'agent-b  get_context(project_id="launchpad")' },
-      { tone: 'ok', text: 'context loaded · next step: connect login screen' },
-      { tone: 'agent', text: 'agent-b  claim_task(expected_version)' },
-      { tone: 'ok', text: 'task claimed · renew the lease before it expires' },
-    ],
-    agents: [
-      { id: 'A', name: 'Agent A', state: 'Recorded handoff' },
-      { id: 'B', name: 'Agent B', state: 'Reading context' },
-    ],
-    footnote: 'The next session starts where the last one stopped.',
-  },
+  clientLabel: 'For MCP-compatible coding agents',
+  clients: ['Claude Code', 'Codex', 'Cursor', 'VS Code / Copilot', 'Gemini CLI', 'Other MCP clients'],
 };
 
 export const problemContent = {
   overline: 'The handoff problem',
-  title: 'Context dies between sessions.',
-  accent: 'Shared memory keeps it alive.',
+  title: 'The next session shouldn’t start from zero.',
+  accent: '',
   description:
-    'A new session should not mean starting over. Agent Context gives every agent one place to read what happened and write what comes next.',
+    'Keep the decisions, test results and unfinished work in one project record. The next agent reads it before continuing.',
   without: {
     label: 'Without shared context',
     items: [
@@ -147,8 +127,8 @@ export const problemContent = {
 
 export const howItWorksContent = {
   overline: 'How it works',
-  title: 'A loop your agents can follow.',
-  accent: 'Read, claim, record, hand off.',
+  title: 'A handoff, from start to finish.',
+  accent: '',
   description:
     'Every session follows the same pattern. The server keeps the record; your agents keep building.',
   steps: [
@@ -189,8 +169,8 @@ export const howItWorksContent = {
 
 export const featuresContent = {
   overline: 'Features',
-  title: 'Everything the next agent needs to know.',
-  accent: 'Nothing it has to guess.',
+  title: 'Keep a useful project record.',
+  accent: '',
   description:
     'A focused tool for keeping project state, task ownership and engineering decisions together.',
   items: [
@@ -235,8 +215,8 @@ export const featuresContent = {
 
 export const quickStartContent = {
   overline: 'Quick start',
-  title: 'Start local. Stay in control.',
-  accent: 'No cloud account required.',
+  title: 'Install it on your computer.',
+  accent: '',
   description:
     'Agent Context runs on your own computer or a team server. Requires Node.js 24+ and npm.',
   tabs: [
@@ -279,8 +259,8 @@ export const quickStartContent = {
 
 export const connectContent = {
   overline: 'Connect your agents',
-  title: 'Point every agent at the same memory.',
-  accent: 'Same project. Different sessions.',
+  title: 'Connect your coding agent.',
+  accent: '',
   description:
     'Generate configuration for your MCP client, then add the shared workflow to the instructions your agent already reads.',
   tabs: [
@@ -327,8 +307,8 @@ Before stopping, record a handoff and complete or release the task.`,
 
 export const dashboardContent = {
   overline: 'Dashboard preview',
-  title: 'See the work, not just the latest message.',
-  accent: 'Projects, tasks, agents and activity.',
+  title: 'Review the record in your browser.',
+  accent: '',
   description:
     'The React dashboard ships with the local server. Inspect project memory, task claims, agents and connection setup in one place.',
   caption: 'Illustrative interface with example data, not a live instance.',
@@ -399,8 +379,8 @@ export const dashboardContent = {
 
 export const teamContent = {
   overline: 'Team setup',
-  title: 'One project. Every computer.',
-  accent: 'Connect the way your team already works.',
+  title: 'Work from different computers.',
+  accent: '',
   description:
     'Run one shared instance. Teammates keep their own agents and models and connect over the network path that fits.',
   methods: [
@@ -443,8 +423,8 @@ export const teamContent = {
 
 export const securityContent = {
   overline: 'Security and limits',
-  title: 'Honest limits, clearly stated.',
-  accent: 'Know the trust boundary before you connect.',
+  title: 'One instance for one trusted team.',
+  accent: '',
   description:
     'Agent Context is built for a single trusted user or team per instance. These are the current limits.',
   limits: [
@@ -463,8 +443,8 @@ export const securityContent = {
 
 export const compatibilityContent = {
   overline: 'Compatibility',
-  title: 'Bring your MCP client.',
-  accent: 'stdio or Streamable HTTP.',
+  title: 'Use the client you already have.',
+  accent: '',
   description:
     'Agent Context works with MCP-compatible coding agents. Configuration examples are not a claim that every client version has been tested.',
   clients: [
@@ -480,10 +460,10 @@ export const compatibilityContent = {
 
 export const roadmapContent = {
   overline: 'Roadmap',
-  title: 'What comes next.',
-  accent: 'Planned work, openly tracked.',
+  title: 'There’s more to work on.',
+  accent: '',
   description:
-    'A short view of the roadmap. Items are placeholders and will be edited as work lands.',
+    'This is an early release. These editable roadmap items describe planned work, with no delivery dates promised.',
   items: [
     {
       status: 'Now',
@@ -521,8 +501,8 @@ export const roadmapContent = {
 };
 
 export const finalCtaContent = {
-  overline: 'Start a shared thread',
-  title: 'Give the next agent a good place to start.',
+  overline: 'Get started',
+  title: 'Leave your next session a useful handoff.',
   description:
     'Install Agent Context locally, connect your MCP client, and make the next handoff the starting point.',
   primary: { label: 'Get started', href: '#quickstart' },

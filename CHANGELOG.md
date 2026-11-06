@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Simplify the landing page with an editorial layout, a readable handoff example,
+  restrained green/blue accents and open feature rows in place of decorative
+  cards and the animated bridge.
+
 - Fix Vercel deployment by pointing its Next.js adapter at `.next` build
   manifests; retain `out/` for the static export and local checks.
 

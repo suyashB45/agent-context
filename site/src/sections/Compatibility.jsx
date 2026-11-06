@@ -1,6 +1,5 @@
 import React from 'react';
 import { compatibilityContent } from '../content.js';
-import { Icon } from '../components/icons.jsx';
 import { Reveal, SectionHeading } from '../components/ui.jsx';
 
 export function Compatibility() {
@@ -16,14 +15,10 @@ export function Compatibility() {
         <div className="lp-compat-grid">
           {compatibilityContent.clients.map((client, index) => (
             <Reveal key={client.name} className="lp-compat-card" delay={index * 0.04}>
-              <span className="lp-compat-icon">
-                <Icon name={client.icon} size={22} />
-              </span>
               <span>
                 <strong>{client.name}</strong>
                 <small>{client.meta}</small>
               </span>
-              <Icon name="check" size={14} />
             </Reveal>
           ))}
         </div>
