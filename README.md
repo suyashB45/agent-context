@@ -7,8 +7,13 @@ continuing.
 
 [Website](https://agentcontext.suyashb.me) ·
 [Source](https://github.com/suyashB45/agent-context) ·
+[npm package](https://www.npmjs.com/package/@suyashb/agent-context) ·
 [Documentation](docs/README.md) · [Contributing](CONTRIBUTING.md) ·
 [MIT license](LICENSE)
+
+![Agent Context dashboard illustration with shared project memory, an example handoff and task lease](docs/images/agent-context-overview.svg)
+
+*Illustrative overview with example data, not a screenshot of a live instance.*
 
 ## Release status
 
@@ -26,6 +31,8 @@ The unscoped npm package `agent-context-mcp` belongs to another maintainer; it i
 not this project.
 
 ## Install from npm
+
+Public package: [@suyashb/agent-context on npm](https://www.npmjs.com/package/@suyashb/agent-context).
 
 ```bash
 npm install -g @suyashb/agent-context
@@ -110,6 +117,8 @@ dashboard. Start the local dashboard only when you want to inspect the history.
 For remote clients, use the running host's endpoint and token. See [client setup](docs/clients.md).
 
 ## Make handoffs part of the workflow
+
+![Workflow: read context, claim a task, record progress, then hand off to the next agent](docs/images/agent-context-workflow.svg)
 
 Use the same project ID for every agent and a unique agent ID per session. Add
 [the shared workflow](examples/AGENT_INSTRUCTIONS.md) to the instruction file

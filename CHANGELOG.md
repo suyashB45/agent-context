@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Link the public scoped npm package and add README overview/workflow SVGs.
+
 - Rebuild the product website with Next.js App Router, Tailwind CSS and Framer
   Motion, including dark/light themes, accessible tabs and mobile navigation.
 - Add a terminal handoff illustration, interactive example dashboard, team

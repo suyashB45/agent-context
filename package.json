@@ -30,7 +30,8 @@
     "docs/operations.md",
     "docs/reference.md",
     "docs/troubleshooting.md",
-    "docs/website.md"
+    "docs/website.md",
+    "docs/images/"
   ],
   "scripts": {
     "build": "npm run docs:check && npm run build:runtime && npm pack --ignore-scripts --pack-destination dist/npm && npm run release:source && npm run site:build && npm run site:check",

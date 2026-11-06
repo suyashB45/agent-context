@@ -68,7 +68,7 @@ export function QuickStart() {
           </div>
           <p className="lp-quickstart-note">
             <Icon name="alert" size={15} />
-            {quickStartContent.note}
+            {quickStartContent.registryCommand ? <a href={quickStartContent.registryUrl} target="_blank" rel="noreferrer">{quickStartContent.note} ↗</a> : quickStartContent.note}
           </p>
         </Reveal>
       </div>

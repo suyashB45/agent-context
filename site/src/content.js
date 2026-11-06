@@ -5,6 +5,7 @@ const cli = config.cliName || 'agent-context';
 const archive = releaseBasename(config.packageName, config.version);
 const github = config.repositoryUrl || 'https://github.com/suyashB45/agent-context';
 const docs = `${github}/tree/main/docs`;
+const npmUrl = `https://www.npmjs.com/package/${config.packageName}`;
 
 export const landingMeta = {
   title: 'Agent Context — Shared memory for your coding agents',
@@ -254,6 +255,7 @@ export const quickStartContent = {
   download: { label: `Download v${config.version} package`, href: `/downloads/${archive}.tgz` },
   registryCommand: config.npmPublished ? `npm install -g ${config.packageName}` : null,
   registryLabel: 'Or install directly from npm',
+  registryUrl: npmUrl,
   dashboardLabel: 'Open the local dashboard',
   dashboardHint: 'Paste the access token into the dashboard, then create a project.',
 };
@@ -545,6 +547,7 @@ export const footerContent = {
       title: 'Project',
       links: [
         { label: 'Releases', href: `${github}/releases` },
+        { label: 'npm package', href: npmUrl },
         { label: 'License', href: '/docs/LICENSE.txt' },
         { label: 'Security', href: `${github}/blob/main/SECURITY.md` },
         { label: 'Roadmap', href: `${github}/blob/main/ROADMAP.md` },
