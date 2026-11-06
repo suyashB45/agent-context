@@ -56,7 +56,7 @@ it locally at http://127.0.0.1:8770.
 Deploy this repository as a Vercel project using the included `vercel.json`.
 Use Node.js 24 in Project Settings. Vercel runs `npm run vercel:build`, which
 builds the local application, creates its downloadable npm and source archives,
-and verifies the seven-page website. The output directory is `site/dist`.
+and verifies the eight-page website. The output directory is `site/dist`.
 The Vercel deployment serves the public website and downloads. Users run the
 SQLite MCP service on their own computers or persistent servers.
 

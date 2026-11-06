@@ -386,3 +386,11 @@ The React website includes documentation and downloadable npm/source releases.
 Import this repository into Vercel with Node.js 24; `vercel.json` configures the
 build and output directory. Set `SITE_URL` after connecting your custom domain.
 See [the deployment and release guide](docs/release.md) for DNS and npm publishing.
+
+## Connect your team
+
+Teammates can use one shared server through the same Wi-Fi/LAN, a private VPN,
+an SSH tunnel, or an always-on HTTPS endpoint. Each uses Streamable HTTP with
+the host's token and the same project ID. See [team connection methods](docs/team.md)
+for commands, allowlists, and troubleshooting. Keep one persistent database on
+the host; teammates do not need separate copies.

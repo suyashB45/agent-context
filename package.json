@@ -23,7 +23,8 @@
     "ROADMAP.md",
     "docs/architecture.md",
     "docs/release.md",
-    "docs/clients.md"
+    "docs/clients.md",
+    "docs/team.md"
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
