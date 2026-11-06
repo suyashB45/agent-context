@@ -2,7 +2,7 @@
 
 ## 0.4.0
 
-- Name the product Handoffra and preserve legacy database/environment settings.
+- Name the product Agent Context and preserve legacy database/environment settings.
 - Add Vercel deployment configuration and custom-domain setup instructions.
 
 - Add a prerendered React launch website, documentation pages, interactive

@@ -6,7 +6,7 @@ import { Client, StreamableHTTPClientTransport } from '@modelcontextprotocol/cli
 const name = 'agent-context-ci-' + randomUUID().slice(0, 8), volume = name + '-data';
 const token = randomBytes(48).toString('base64url');
 function docker(args, check = true) {
-  const result = spawnSync('docker', args, { encoding: 'utf8', env: { ...process.env, HANDOFFRA_TOKEN: token }, timeout: 60000 });
+  const result = spawnSync('docker', args, { encoding: 'utf8', env: { ...process.env, AGENT_CONTEXT_TOKEN: token }, timeout: 60000 });
   if (check && result.status !== 0) throw new Error(result.stderr || 'Docker command failed');
   return result.stdout;
 }
@@ -32,7 +32,7 @@ async function exchange(port, write) {
   } finally { await client.close(); }
 }
 try {
-  docker(['run', '-d', '--name', name, '--env', 'HANDOFFRA_TOKEN', '--read-only', '--tmpfs', '/tmp:rw,noexec,nosuid,size=32m', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true', '--publish', '127.0.0.1::8765', '--volume', `${volume}:/data`, 'handoffra:ci']);
+  docker(['run', '-d', '--name', name, '--env', 'AGENT_CONTEXT_TOKEN', '--read-only', '--tmpfs', '/tmp:rw,noexec,nosuid,size=32m', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true', '--publish', '127.0.0.1::8765', '--volume', `${volume}:/data`, 'agent-context-mcp:ci']);
   const port = Number(docker(['port', name, '8765/tcp']).trim().split(':').at(-1));
   await healthy(port); await exchange(port, true);
   docker(['restart', name]); await healthy(port); await exchange(port, false);

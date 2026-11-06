@@ -1,7 +1,7 @@
 Add this workflow to the instruction file read by each coding agent in your project.
 Replace `<project-slug>` with the same project ID for every agent.
 
-Use the Handoffra MCP server for `<project-slug>`.
+Use the Agent Context MCP server for `<project-slug>`.
 
 1. Use a unique agent_id for each session.
 2. Read get_context and list_tasks before editing. Create the project if needed.

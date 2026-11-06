@@ -9,8 +9,8 @@ RUN npm run build
 
 FROM node:24-bookworm-slim
 ENV NODE_ENV=production \
-    HANDOFFRA_DB=/data/context.sqlite3 \
-    HANDOFFRA_HOST=0.0.0.0
+    AGENT_CONTEXT_DB=/data/context.sqlite3 \
+    AGENT_CONTEXT_HOST=0.0.0.0
 WORKDIR /app
 RUN groupadd --gid 10001 agentcontext \
     && useradd --uid 10001 --gid 10001 --no-create-home agentcontext \
@@ -23,4 +23,4 @@ EXPOSE 8765
 VOLUME ["/data"]
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD node -e "fetch('http://127.0.0.1:8765/healthz').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"
-ENTRYPOINT ["node", "/app/bin/handoffra.mjs"]
+ENTRYPOINT ["node", "/app/bin/agent-context-mcp.mjs"]

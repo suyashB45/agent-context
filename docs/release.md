@@ -38,7 +38,7 @@ Authenticate on a machine that can reach npm and has rights to the selected
 package name. Publish the exact reviewed tarball:
 
 ```bash
-npm publish ./dist/npm/handoffra-0.4.0.tgz --access public
+npm publish ./dist/npm/agent-context-mcp-0.4.0.tgz --access public
 ```
 
 Verify the registry package and install it into a fresh environment before

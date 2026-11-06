@@ -50,6 +50,6 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: docker build -t handoffra:ci .
+      - run: docker build -t agent-context-mcp:ci .
       - run: node scripts/test-container.mjs
         timeout-minutes: 3

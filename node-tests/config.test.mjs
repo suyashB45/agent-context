@@ -15,8 +15,8 @@ test('credentials have explicit sources and strong token validation', (t) => {
   const dir = mkdtempSync(join(tmpdir(), 'ac-config-')); t.after(() => rmSync(dir, { recursive: true, force: true }));
   const path = join(dir, 'token'); writeFileSync(path, 'x'.repeat(64) + '\n');
   assert.equal(readToken(path, {}), 'x'.repeat(64));
-  assert.throws(() => readToken(path, { HANDOFFRA_TOKEN: 'y'.repeat(64) }), /not both/);
-  for (const token of ['', 'short', 'x'.repeat(513), 'é'.repeat(64), 'has spaces '.repeat(5)]) assert.throws(() => readToken(undefined, { HANDOFFRA_TOKEN: token }), /Invalid bearer/);
+  assert.throws(() => readToken(path, { AGENT_CONTEXT_TOKEN: 'y'.repeat(64) }), /not both/);
+  for (const token of ['', 'short', 'x'.repeat(513), 'é'.repeat(64), 'has spaces '.repeat(5)]) assert.throws(() => readToken(undefined, { AGENT_CONTEXT_TOKEN: token }), /Invalid bearer/);
   assert.match(keygen(), /^[A-Za-z0-9_-]{64}$/);
 });
 test('first-run dashboard tokens persist privately outside the installation', (t) => {
@@ -37,30 +37,30 @@ test('host/origin wildcards, invalid URLs, and unsafe request limits are rejecte
 });
 
 test('CLI help, version, validation, and explicit actions work without a subprocess', async (t) => {
-  const original = console.log, transport = process.env.HANDOFFRA_TRANSPORT;
+  const original = console.log, transport = process.env.AGENT_CONTEXT_TRANSPORT;
   const output = [];
   console.log = (...args) => output.push(args.join(' '));
-  t.after(() => { console.log = original; if (transport === undefined) delete process.env.HANDOFFRA_TRANSPORT; else process.env.HANDOFFRA_TRANSPORT = transport; });
+  t.after(() => { console.log = original; if (transport === undefined) delete process.env.AGENT_CONTEXT_TRANSPORT; else process.env.AGENT_CONTEXT_TRANSPORT = transport; });
   await main(['--version']); assert.equal(output.pop(), '0.4.0');
   await main(['--help']); assert.ok(output.pop().includes('Start the React dashboard'));
   await assert.rejects(main(['--unknown-option']), /Unknown option/);
   await assert.rejects(main(['serve', 'backup']), /one action/);
-  process.env.HANDOFFRA_TRANSPORT = 'stdio';
+  process.env.AGENT_CONTEXT_TRANSPORT = 'stdio';
   await main(['keygen']); assert.match(output.pop(), /^[A-Za-z0-9_-]{64}$/);
 });
 
 test('rebranding reuses the existing default database and credentials', (t) => {
-  const dir = mkdtempSync(join(tmpdir(), 'handoffra-legacy-'));
+  const dir = mkdtempSync(join(tmpdir(), 'agent-context-mcp-legacy-'));
   t.after(() => rmSync(dir, { recursive: true, force: true }));
-  const legacy = join(dir, 'agent-context-mcp', 'context.sqlite3');
-  mkdirSync(join(dir, 'agent-context-mcp')); writeFileSync(legacy, 'existing database');
+  const legacy = join(dir, 'handoffra', 'context.sqlite3');
+  mkdirSync(join(dir, 'handoffra')); writeFileSync(legacy, 'existing database');
   assert.equal(defaultDatabase({ XDG_DATA_HOME: dir }, 'linux'), legacy);
   const token = 'x'.repeat(64);
-  assert.equal(readToken(undefined, { AGENT_CONTEXT_TOKEN: token }), token);
-  assert.equal(environmentValue('DB', { AGENT_CONTEXT_DB: legacy }), legacy);
-  assert.throws(() => readToken(undefined, { AGENT_CONTEXT_TOKEN: token, HANDOFFRA_TOKEN: 'y'.repeat(64) }), /Conflicting/);
-  assert.throws(() => readToken(undefined, { AGENT_CONTEXT_TOKEN: token, HANDOFFRA_TOKEN_FILE: 'token' }), /not both/);
-  mkdirSync(join(dir, 'handoffra')); const current = join(dir, 'handoffra', 'context.sqlite3');
+  assert.equal(readToken(undefined, { HANDOFFRA_TOKEN: token }), token);
+  assert.equal(environmentValue('DB', { HANDOFFRA_DB: legacy }), legacy);
+  assert.throws(() => readToken(undefined, { HANDOFFRA_TOKEN: token, AGENT_CONTEXT_TOKEN: 'y'.repeat(64) }), /Conflicting/);
+  assert.throws(() => readToken(undefined, { HANDOFFRA_TOKEN: token, AGENT_CONTEXT_TOKEN_FILE: 'token' }), /not both/);
+  mkdirSync(join(dir, 'agent-context-mcp')); const current = join(dir, 'agent-context-mcp', 'context.sqlite3');
   writeFileSync(current, 'new database');
   assert.equal(defaultDatabase({ XDG_DATA_HOME: dir }, 'linux'), current);
 });

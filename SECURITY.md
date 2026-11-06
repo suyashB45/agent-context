@@ -1,6 +1,6 @@
 # Operating and security boundaries
 
-Handoffra is designed for a single trusted user or team per instance.
+Agent Context is designed for a single trusted user or team per instance.
 Anyone holding its bearer token can read and write every project in that
 instance. Self-reported agent IDs and project slugs do not establish identity
 or enforce tenant isolation. Use separate instances for separate trust groups.

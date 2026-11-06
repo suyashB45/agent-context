@@ -1,11 +1,11 @@
 services:
   agent-context:
     build: .
-    image: handoffra:0.4.0
+    image: agent-context-mcp:0.4.0
     init: true
     restart: unless-stopped
     env_file: .env
-    command: ["--allowed-host", "${HANDOFFRA_PUBLIC_HOST:-localhost}", "--allowed-origin", "${HANDOFFRA_PUBLIC_ORIGIN:-http://localhost:8765}"]
+    command: ["--allowed-host", "${AGENT_CONTEXT_PUBLIC_HOST:-localhost}", "--allowed-origin", "${AGENT_CONTEXT_PUBLIC_ORIGIN:-http://localhost:8765}"]
     ports:
       - "127.0.0.1:8765:8765"
     volumes:

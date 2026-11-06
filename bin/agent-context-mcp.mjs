@@ -4,6 +4,6 @@ try {
   const { main } = await import('../build/npm/cli.mjs');
   await main();
 } catch (error) {
-  process.stderr.write(`handoffra: ${error.message}\n`);
+  process.stderr.write(`agent-context-mcp: ${error.message}\n`);
   process.exitCode = 1;
 }

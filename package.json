@@ -1,5 +1,5 @@
 {
-  "name": "handoffra",
+  "name": "agent-context-mcp",
   "version": "0.4.0",
   "description": "Self-hosted MCP project memory with a React dashboard for coding agents",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=24.0.0"
   },
   "bin": {
-    "handoffra": "bin/handoffra.mjs"
+    "agent-context-mcp": "bin/agent-context-mcp.mjs"
   },
   "files": [
     "bin/",
@@ -26,7 +26,7 @@
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
-    "start": "node bin/handoffra.mjs dashboard",
+    "start": "node bin/agent-context-mcp.mjs dashboard",
     "test": "node --test --test-isolation=none --test-concurrency=1 node-tests/*.test.mjs",
     "check": "node scripts/check.mjs",
     "test:package": "node scripts/verify-package.mjs",

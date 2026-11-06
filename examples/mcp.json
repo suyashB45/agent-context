@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "agent-context": {
-      "command": "handoffra",
+      "command": "agent-context-mcp",
       "args": [
         "stdio",
         "--db",

@@ -6,9 +6,9 @@ import { Store } from './store.mjs';
 import { buildServer } from './mcp.mjs';
 import { createApplication, nodeServer } from './http.mjs';
 
-const HELP = `Handoffra ${VERSION}
+const HELP = `Agent Context ${VERSION}
 
-Usage: handoffra [dashboard|stdio|token|keygen|check|backup] [options]
+Usage: agent-context-mcp [dashboard|stdio|token|keygen|check|backup] [options]
 
   dashboard    Start the React dashboard and HTTP MCP service (default)
   stdio        Start an MCP subprocess for coding agents; also --mcp
@@ -18,7 +18,7 @@ Usage: handoffra [dashboard|stdio|token|keygen|check|backup] [options]
   backup       Back up an existing database to --output (never overwrites)
 
 Options:
-  --db PATH               SQLite file (also HANDOFFRA_DB)
+  --db PATH               SQLite file (also AGENT_CONTEXT_DB)
   --host HOST             Bind address (default 127.0.0.1)
   --port PORT             HTTP port (default 8765)
   --token-file PATH       Read credentials from a file
@@ -30,7 +30,7 @@ Options:
   --help                  Show this help
   --version               Show installed version
 
-HTTP also accepts HANDOFFRA_TOKEN or HANDOFFRA_TOKEN_FILE.
+HTTP also accepts AGENT_CONTEXT_TOKEN or AGENT_CONTEXT_TOKEN_FILE.
 Requires Node.js 24 or newer. No Python, native compilation or API key needed.
 `;
 
@@ -94,6 +94,6 @@ export async function main(argv = process.argv.slice(2)) {
   });
   server.listen(app.config.port, app.config.host, () => {
     const host = app.config.host.includes(':') ? `[${app.config.host}]` : app.config.host;
-    process.stderr.write(`Handoffra ${VERSION}\nDashboard: http://${host}:${app.config.port}/dashboard\nMCP endpoint: http://${host}:${app.config.port}/mcp\nShow the access token with: handoffra token --db ${JSON.stringify(database)}\n`);
+    process.stderr.write(`Agent Context ${VERSION}\nDashboard: http://${host}:${app.config.port}/dashboard\nMCP endpoint: http://${host}:${app.config.port}/mcp\nShow the access token with: agent-context-mcp token --db ${JSON.stringify(database)}\n`);
   });
 }

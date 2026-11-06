@@ -16,7 +16,7 @@ assert.equal(htmlFiles.length, 6, 'Landing page plus five documentation pages mu
 let links = 0;
 for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
-  assert.ok(html.includes('id="root"') && html.includes('Handoffra'), 'Pages must be prerendered, not empty React shells.');
+  assert.ok(html.includes('id="root"') && html.includes('Agent Context'), 'Pages must be prerendered, not empty React shells.');
   assert.ok(html.includes('<title>') && html.includes('name="description"'));
   for (const match of html.matchAll(/(?:href|src)="(\/[^"<>]*)"/g)) {
     const url = new URL(match[1].replaceAll('&amp;', '&'), 'https://local.invalid');

@@ -1,4 +1,4 @@
-# Handoffra
+# Agent Context
 
 A self-hosted MCP server with a **React dashboard**, distributed as an npm
 package. Claude, Codex, and other MCP clients share project context, decisions,
@@ -14,31 +14,31 @@ and compiled React assets; users do not build the dashboard themselves.
 ## Install the downloadable package
 
 The npm registry release is pending. The installable package is available in
-`dist/npm/handoffra-0.4.0.tgz`. Share this file; anyone with Node.js 24+
+`dist/npm/agent-context-mcp-0.4.0.tgz`. Share this file; anyone with Node.js 24+
 can install it, including offline:
 
 ```bash
-npm install -g ./handoffra-0.4.0.tgz
-handoffra
+npm install -g ./agent-context-mcp-0.4.0.tgz
+agent-context-mcp
 ```
 
 From this source directory, the equivalent install is:
 
 ```bash
-npm install -g ./dist/npm/handoffra-0.4.0.tgz
+npm install -g ./dist/npm/agent-context-mcp-0.4.0.tgz
 ```
 
 Once a maintainer publishes the package to npm, users will be able to run:
 
 ```bash
-npm install -g handoffra
-handoffra
+npm install -g agent-context-mcp
+agent-context-mcp
 ```
 
 Or, without a global installation, after publication:
 
 ```bash
-npx handoffra
+npx agent-context-mcp
 ```
 
 These registry commands depend on the package being published under that name;
@@ -51,20 +51,20 @@ commands to match. See [Publishing](#publishing).
 The default command starts the local dashboard and HTTP MCP endpoint:
 
 ```bash
-handoffra
+agent-context-mcp
 ```
 
 Open **http://127.0.0.1:8765/dashboard**. In another terminal, retrieve the login
 token:
 
 ```bash
-handoffra token
+agent-context-mcp token
 ```
 
 Paste it into the dashboard. The first run provisions a private token beside
 the database and reuses it on later runs. The browser keeps the token in memory,
 so reloading requires reconnecting. The token is not put in a URL, cookie, or
-browser storage. `handoffra dashboard` is an explicit alias for the
+browser storage. `agent-context-mcp dashboard` is an explicit alias for the
 default command.
 
 The React dashboard includes:
@@ -85,23 +85,23 @@ The Node service preserves the SQLite schema used by the earlier Python
 release. To use an existing database, pass its exact path:
 
 ```bash
-handoffra --db /absolute/path/to/your/context.sqlite3
-handoffra token --db /absolute/path/to/your/context.sqlite3
+agent-context-mcp --db /absolute/path/to/your/context.sqlite3
+agent-context-mcp token --db /absolute/path/to/your/context.sqlite3
 ```
 
 For the original source-checkout database on this machine:
 
 ```bash
-handoffra --db "$HOME/Desktop/agent-context-mcp/data/context.sqlite3"
+agent-context-mcp --db "$HOME/Desktop/agent-context-mcp/data/context.sqlite3"
 ```
 
 Use the same `--db` for token retrieval, backups, and agent connections. Existing
 records are not moved or cleared. New installations default to the OS user data
-directory: `$XDG_DATA_HOME/handoffra` or `~/.local/share/handoffra`
+directory: `$XDG_DATA_HOME/agent-context-mcp` or `~/.local/share/agent-context-mcp`
 on Linux, Application Support on macOS, and LocalAppData on Windows. Set
-`HANDOFFRA_DB` to override it. Existing default databases under
-`agent-context-mcp` are reused when no Handoffra default database exists. Legacy
-`AGENT_CONTEXT_*` settings remain supported; conflicting old and new values are
+`AGENT_CONTEXT_DB` to override it. Existing default databases under
+`handoffra` are reused when no Agent Context default database exists. Legacy
+`HANDOFFRA_*` settings remain supported; conflicting old and new values are
 rejected. Data is stored outside a global npm install,
 so upgrading the package does not replace it.
 
@@ -117,8 +117,8 @@ bearer token is needed for stdio. **The npm CLI requires the `stdio` action**
 when launched by an MCP client; its default action opens the HTTP service.
 
 ```bash
-codex mcp add agent-context -- handoffra stdio --db /absolute/path/to/shared/context.sqlite3
-claude mcp add --scope user agent-context -- handoffra stdio --db /absolute/path/to/shared/context.sqlite3
+codex mcp add agent-context -- agent-context-mcp stdio --db /absolute/path/to/shared/context.sqlite3
+claude mcp add --scope user agent-context -- agent-context-mcp stdio --db /absolute/path/to/shared/context.sqlite3
 ```
 
 If the agent cannot find global npm executables, use the absolute path to the
@@ -131,9 +131,9 @@ Keep the service running. In the shell that starts your agents, export the
 instance's token:
 
 ```bash
-export HANDOFFRA_TOKEN="$(handoffra token)"
-codex mcp add agent-context --url http://127.0.0.1:8765/mcp --bearer-token-env-var HANDOFFRA_TOKEN
-claude mcp add --scope user --transport http agent-context http://127.0.0.1:8765/mcp --header "Authorization: Bearer $HANDOFFRA_TOKEN"
+export AGENT_CONTEXT_TOKEN="$(agent-context-mcp token)"
+codex mcp add agent-context --url http://127.0.0.1:8765/mcp --bearer-token-env-var AGENT_CONTEXT_TOKEN
+claude mcp add --scope user --transport http agent-context http://127.0.0.1:8765/mcp --header "Authorization: Bearer $AGENT_CONTEXT_TOKEN"
 ```
 
 Use the same custom `--db` when retrieving a token if you started the server
@@ -142,8 +142,8 @@ configuration; protect that file. [examples/codex.toml](examples/codex.toml)
 shows Codex's environment-based token configuration. Choose one transport per
 registration name and restart existing client sessions after changing it.
 
-On PowerShell, set `$env:HANDOFFRA_TOKEN = handoffra token` before
-registering the client, and use `$env:HANDOFFRA_TOKEN` in the Claude header.
+On PowerShell, set `$env:AGENT_CONTEXT_TOKEN = agent-context-mcp token` before
+registering the client, and use `$env:AGENT_CONTEXT_TOKEN` in the Claude header.
 This is an operator-provisioned bearer token, not an interactive OAuth login.
 
 ### Tell agents to use shared context
@@ -168,23 +168,23 @@ verify code. See [examples/AGENT_INSTRUCTIONS.md](examples/AGENT_INSTRUCTIONS.md
 
 ## Configuration and self-hosting
 
-`handoffra --help` lists all commands. HTTP binds to loopback and uses
+`agent-context-mcp --help` lists all commands. HTTP binds to loopback and uses
 a private bearer token by default. To supply your own credentials, set
-`HANDOFFRA_TOKEN`, `HANDOFFRA_TOKEN_FILE`, or `--token-file`. Set only
-one token source. `handoffra keygen` generates a fresh random token.
+`AGENT_CONTEXT_TOKEN`, `AGENT_CONTEXT_TOKEN_FILE`, or `--token-file`. Set only
+one token source. `agent-context-mcp keygen` generates a fresh random token.
 Rotate by replacing it, restarting the service, and updating clients.
 
 Local development can explicitly opt out of authentication:
 
 ```bash
-handoffra --allow-unauthenticated-local
+agent-context-mcp --allow-unauthenticated-local
 ```
 
 This refuses a non-loopback bind. Remote access should use HTTPS through a
 reverse proxy with exact Host/Origin allowlists:
 
 ```bash
-handoffra --host 127.0.0.1 --allowed-host context.example.com --allowed-origin https://context.example.com --db /srv/agent-context/context.sqlite3 --token-file /path/to/token
+agent-context-mcp --host 127.0.0.1 --allowed-host context.example.com --allowed-origin https://context.example.com --db /srv/agent-context/context.sqlite3 --token-file /path/to/token
 ```
 
 The service checks Host and Origin, limits HTTP bodies to 256 KiB, defaults to
@@ -210,8 +210,8 @@ compiled package as a non-root user. From the source directory:
 
 ```bash
 umask 077
-printf 'HANDOFFRA_TOKEN=' > .env
-node bin/handoffra.mjs keygen >> .env
+printf 'AGENT_CONTEXT_TOKEN=' > .env
+node bin/agent-context-mcp.mjs keygen >> .env
 docker compose up -d --build
 ```
 
@@ -222,16 +222,16 @@ per data volume on a local disk. Do not use a network filesystem or scale
 replicas against the same SQLite file.
 
 For remote use, configure [examples/Caddyfile](examples/Caddyfile), replace its
-hostname, and set `HANDOFFRA_PUBLIC_HOST=your.hostname` and
-`HANDOFFRA_PUBLIC_ORIGIN=https://your.hostname` in `.env`. Configure proxy
+hostname, and set `AGENT_CONTEXT_PUBLIC_HOST=your.hostname` and
+`AGENT_CONTEXT_PUBLIC_ORIGIN=https://your.hostname` in `.env`. Configure proxy
 timeouts and your firewall for that environment. DNS, certificates, and hosting
 are not provisioned by this package.
 
 ## Backups and upgrades
 
 ```bash
-handoffra backup --db /path/to/context.sqlite3 --output /path/to/backups/context-2026-11-06.sqlite3
-handoffra check --db /path/to/backups/context-2026-11-06.sqlite3
+agent-context-mcp backup --db /path/to/context.sqlite3 --output /path/to/backups/context-2026-11-06.sqlite3
+agent-context-mcp check --db /path/to/backups/context-2026-11-06.sqlite3
 ```
 
 Backups include committed WAL data and refuse to overwrite existing files.
@@ -244,7 +244,7 @@ onto a restored backup or replace a live database.
 For Docker:
 
 ```bash
-docker compose exec agent-context node /app/bin/handoffra.mjs backup --output /data/backup.sqlite3
+docker compose exec agent-context node /app/bin/agent-context-mcp.mjs backup --output /data/backup.sqlite3
 docker compose cp agent-context:/data/backup.sqlite3 ./backup.sqlite3
 ```
 
@@ -292,7 +292,7 @@ npm start
 ```
 
 When running from source, retrieve the dashboard token in another terminal with
-`node bin/handoffra.mjs token`. If you supplied a custom `--db` to
+`node bin/agent-context-mcp.mjs token`. If you supplied a custom `--db` to
 `npm start -- --db ...`, supply the same path when retrieving the token.
 
 The source is organized as `src/` (Node service), `web/src/` (React),
@@ -304,7 +304,7 @@ third-party licenses.
 Tests cover storage, concurrency, leases, migration, backups, authentication,
 HTTP/SDK handoffs, React rendering, escaping stored text, and token handling.
 Two subprocess tests can be explicitly skipped with
-`HANDOFFRA_SKIP_SUBPROCESS_TESTS=1` in restricted environments; CI runs them
+`AGENT_CONTEXT_SKIP_SUBPROCESS_TESTS=1` in restricted environments; CI runs them
 without that override. HTTP tests use the SDK's real fetch transport without
 opening network sockets. Browser rendering and container checks require the
 corresponding tools on the test host.
@@ -334,7 +334,7 @@ npm run site:serve
 Open http://127.0.0.1:8770 for the product site. This is separate from the local
 workspace at port 8765. `site/dist/` can be deployed as a static site.
 
-`dist/release/handoffra-0.4.0-source.tar.gz` is an inspectable source
+`dist/release/agent-context-mcp-0.4.0-source.tar.gz` is an inspectable source
 archive generated from a source allowlist. It includes a per-file checksum
 manifest and excludes data files, credentials, caches, and hosting identity.
 The site's download manifest includes SHA-256 checksums for both releases.
@@ -358,7 +358,7 @@ Review the tarball contents and choose an npm name you control. Then, from an
 npm-authenticated machine with publishing rights:
 
 ```bash
-npm publish ./dist/npm/handoffra-0.4.0.tgz --access public
+npm publish ./dist/npm/agent-context-mcp-0.4.0.tgz --access public
 ```
 
 Publishing requires an npm account and the registry's current authentication

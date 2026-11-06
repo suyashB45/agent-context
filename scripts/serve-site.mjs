@@ -19,5 +19,5 @@ const server = createServer(async (request, response) => {
   } catch { response.writeHead(404); response.end('Not found'); }
 });
 server.on('error', (error) => { process.stderr.write(`Cannot preview site: ${error.code}\n`); process.exitCode = 1; });
-server.listen(8770, '127.0.0.1', () => console.log('Handoffra launch site: http://127.0.0.1:8770'));
+server.listen(8770, '127.0.0.1', () => console.log('Agent Context launch site: http://127.0.0.1:8770'));
 process.once('SIGINT', () => server.close()); process.once('SIGTERM', () => server.close());

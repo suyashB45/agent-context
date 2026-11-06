@@ -1,4 +1,4 @@
 # Add to ~/.codex/config.toml; choose either this HTTP entry or a stdio entry.
 [mcp_servers.agent-context]
 url = "http://127.0.0.1:8765/mcp"
-bearer_token_env_var = "HANDOFFRA_TOKEN"
+bearer_token_env_var = "AGENT_CONTEXT_TOKEN"

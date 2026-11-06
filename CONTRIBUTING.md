@@ -1,6 +1,6 @@
-# Contributing to Handoffra
+# Contributing to Agent Context
 
-Handoffra helps coding agents continue one another's work. Contributions
+Agent Context helps coding agents continue one another's work. Contributions
 should improve shared project context, agent handoffs, local operation, or the
 clarity of those workflows.
 
@@ -25,7 +25,7 @@ npm start -- --db ./data/dev.sqlite3
 In another terminal, retrieve its dashboard token directly from the source CLI:
 
 ```bash
-node bin/handoffra.mjs token --db ./data/dev.sqlite3
+node bin/agent-context-mcp.mjs token --db ./data/dev.sqlite3
 ```
 
 Never attach real databases, credentials, or private handoffs to issues.
