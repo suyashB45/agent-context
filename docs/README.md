@@ -41,8 +41,9 @@ path for editors and services. Preserve existing client configurations.
 
 ## Release and verification status
 
-The checkout builds version 0.4.0. npm publication remains pending until the
-maintainer verifies the registry release and updates `site/config.json`.
+Version 0.4.0 is published under `@suyashb/agent-context`. Use
+`npm install -g @suyashb/agent-context` to install it. Website downloads use the
+exact published archive, verified against the recorded registry integrity.
 The configured CI targets Linux, macOS, Windows, and a container; configuration
 alone is not proof those jobs passed. Automated checks have run in the current
 Linux environment. Every editor UI, operating system, local model, and network

@@ -12,11 +12,10 @@ continuing.
 
 ## Release status
 
-This checkout prepares **0.4.0**, an early release. The public npm registry
-release is pending (`site/config.json` has `npmPublished: false`). Install the
-reviewed downloadable package or build from source; installation by registry
-name is not yet the documented working path. The repository contains deployment
-configuration, not proof of a live website or passed remote CI run.
+**Version 0.4.0 is published** as
+[`@suyashb/agent-context`](https://www.npmjs.com/package/@suyashb/agent-context).
+The product website is https://agentcontext.suyashb.me. CI verification covers
+the tested revision; see the release guide for checking a deployment and package.
 
 Requires **Node.js 24+ and npm**. Python, a cloud model, and a model API key are
 not required by Agent Context. Your chosen coding agent or model may have its
@@ -24,15 +23,22 @@ own requirements. See [compatibility](docs/compatibility.md).
 
 The npm package is **`@suyashb/agent-context`** and its CLI is **`agent-context`**.
 The unscoped npm package `agent-context-mcp` belongs to another maintainer; it is
-not this project. Once our scoped release is published, install it with
-`npm install -g @suyashb/agent-context`. Until then, use the downloadable package
-or source instructions below.
+not this project.
+
+## Install from npm
+
+```bash
+npm install -g @suyashb/agent-context
+agent-context
+```
+
+Then follow the dashboard and agent connection instructions below. Pin a release
+with `npm install -g @suyashb/agent-context@0.4.0` when reproducibility is needed.
 
 ## Quick start: downloaded npm package
 
 Download `suyashb-agent-context-0.4.0.tgz` from the
-[official website](https://agentcontext.suyashb.me) after the renamed release is
-deployed, or build it from this source checkout. Open a terminal in the
+[official website](https://agentcontext.suyashb.me) or build it from this source checkout. Open a terminal in the
 folder containing that file, then:
 
 ```bash

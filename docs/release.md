@@ -174,3 +174,25 @@ are blocked by connectivity, permissions, or missing evidence. A network error
 is not proof a service is down or a package unpublished. Public GitHub API rate
 limits may require retrying later. This command never publishes or changes
 accounts and never announces a launch.
+
+## Preserve published package bytes on website updates
+
+`site/published-release.json` records the verified npm tarball URL, SHA-512
+integrity, and SHA-1 shasum for the current public release. When `npmPublished`
+is true, the site build uses those exact bytes for its npm download. A fresh
+CI/Vercel build retrieves the archive from npm; a matching local copy can be
+reused. Rebuilding the website must not replace an immutable registry release
+with a newly packed archive containing later docs or metadata changes.
+
+For a new version, update package/site versions together and set `npmPublished`
+to false while preparing the candidate archive. Publish and verify that version,
+update the release record from registry metadata, then set `npmPublished` to true. In restricted
+local environments, `dist/published/` can hold the verified archive as a local
+cache. It is ignored by Git and excluded from source exports. A mismatched
+checksum or unavailable required download fails the build.
+
+A public `0.0.0-stage` placeholder is not a working release. For staged
+publishing, review the entry with `npm stage list @suyashb/agent-context` and
+`npm stage view STAGE_ID`, then approve it with `npm stage approve STAGE_ID`
+and complete 2FA. Confirm the actual version through the public registry before
+updating the publication flag. Do not infer publication from a success line alone.

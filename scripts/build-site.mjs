@@ -1,3 +1,4 @@
+import { ensurePublishedPackage } from './published-package.mjs';
 import { releaseBasename } from '../src/release-files.mjs';
 import { build } from 'esbuild';
 import { createElement } from 'react';
@@ -17,6 +18,10 @@ for (const link of config.profileLinks || []) {
   if (!link || typeof link.label !== 'string' || !link.label.trim() || typeof link.url !== 'string') throw new Error('Profile links require a label and URL.');
   const url = new URL(link.url);
   if (!['https:', 'http:', 'mailto:'].includes(url.protocol) || url.username || url.password) throw new Error('Profile links must use http(s) or mailto without credentials.');
+}
+if (config.npmPublished) {
+  const release = JSON.parse(await readFile('site/published-release.json', 'utf8'));
+  await ensurePublishedPackage({ root, pkg, release });
 }
 const archive = releaseBasename(pkg.name, pkg.version);
 const files = [

@@ -2,7 +2,7 @@
   "productName": "Agent Context",
   "packageName": "@suyashb/agent-context",
   "version": "0.4.0",
-  "npmPublished": false,
+  "npmPublished": true,
   "repositoryUrl": "https://github.com/suyashB45/agent-context",
   "origin": "https://agentcontext.suyashb.me",
   "profileLinks": [
