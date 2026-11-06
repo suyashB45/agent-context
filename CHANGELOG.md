@@ -2,6 +2,10 @@
 
 ## 0.4.0
 
+- Correct container smoke-test allowlists for the actual published port instead
+  of relying on a Host header override; retain startup diagnostics on failure.
+- Update GitHub Actions to their Node.js 24 runtime versions.
+
 - Add an explicit live launch verification command for current-main CI,
   live downloads, npm publication, artifact consistency, and a clean install.
 
