@@ -1,3 +1,8 @@
+> Historical Python prototype. New installations should follow the Node.js/React
+> [quick start](../README.md). Do not install both executables into the same active
+> PATH without choosing which one to run. This guide does not describe the active
+> npm package or its React dashboard.
+
 # Agent Context MCP
 
 A self-hosted shared memory server for coding agents. Claude, Codex, and other
@@ -67,7 +72,7 @@ claude mcp add --scope user agent-context -- /absolute/path/to/.venv/bin/agent-c
 
 Replace the paths with your installation and data file. Both commands must use
 the **same absolute database path**. Restart existing agent sessions.
-[examples/mcp.json](examples/mcp.json) provides the equivalent stdio entry for
+[examples/mcp.json](../examples/mcp.json) provides the equivalent stdio entry for
 clients using a `mcpServers` configuration object.
 
 Run agents from your actual repository, not from the server source directory:
@@ -92,7 +97,7 @@ Before stopping, record a handoff and complete or release your task.
 
 Add this text to your project's `AGENTS.md` for Codex and `CLAUDE.md` for Claude,
 preserving existing instructions. A fuller workflow is in
-[examples/AGENT_INSTRUCTIONS.md](examples/AGENT_INSTRUCTIONS.md).
+[examples/AGENT_INSTRUCTIONS.md](../examples/AGENT_INSTRUCTIONS.md).
 The server shares recorded engineering facts; it does not automatically read
 agent conversations, inspect repositories, or execute code.
 
@@ -135,7 +140,7 @@ codex mcp add agent-context --url http://127.0.0.1:8765/mcp --bearer-token-env-v
 codex mcp list
 ```
 
-[examples/codex.toml](examples/codex.toml) shows the equivalent configuration.
+[examples/codex.toml](../examples/codex.toml) shows the equivalent configuration.
 If you already registered `agent-context` using stdio, choose one transport and
 update the existing registration rather than adding a second entry with the
 same name. The command syntax follows the
@@ -182,7 +187,7 @@ one process and one worker; use one instance per SQLite data volume on a local
 disk. Do not scale replicas against a shared network filesystem.
 
 For remote users, configure HTTPS on your host with
-[examples/Caddyfile](examples/Caddyfile). Replace its hostname and add
+[examples/Caddyfile](../examples/Caddyfile). Replace its hostname and add
 `AGENT_CONTEXT_PUBLIC_HOST=your.hostname` and
 `AGENT_CONTEXT_PUBLIC_ORIGIN=https://your.hostname` to `.env` before recreating the
 container. Caddy preserves the public Host header, which the application checks.
@@ -303,5 +308,5 @@ HTTP tests use the real ASGI app and SDK transport without opening sockets.
 The checked-in CI workflow runs supported Python versions, package builds,
 stdio integration, and a non-root container persistence test. The workflow has
 to run on a GitHub runner to establish those results; this source directory has
-not been published or deployed. See [SECURITY.md](SECURITY.md) for operating
-boundaries and [CHANGELOG.md](CHANGELOG.md) for upgrade notes.
+not been published or deployed. See [SECURITY.md](../SECURITY.md) for operating
+boundaries and [CHANGELOG.md](../CHANGELOG.md) for upgrade notes.

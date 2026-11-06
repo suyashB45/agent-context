@@ -41,3 +41,16 @@ Each instance is one trust boundary. Every bearer token holder has the same
 read/write permissions. Agent names are client reports, not authenticated
 identities. The server does not capture conversations, inspect source code,
 execute tests, run agents, or make model API calls.
+
+## Configuration and product website
+
+`src/client-config.mjs` generates model-independent stdio settings with the
+client-specific JSON wrapper. The CLI prints it without editing files. The
+running dashboard gets its database path through the authenticated
+`/api/connection` endpoint; copied local configs are for that host computer.
+
+`site/src/` is a separate React product website. Its build prerenders docs,
+creates a sitemap, and serves copies of the reviewed npm/source archives. It
+contains no MCP instance database or credentials. `vercel.json` deploys that
+static output. See [operations](operations.md), [reference](reference.md), and
+[team networking](team.md) for runtime setup.

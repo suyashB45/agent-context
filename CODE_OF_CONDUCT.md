@@ -12,6 +12,7 @@ Maintainers may edit or remove harmful material, close unproductive threads,
 or restrict participation to protect the community. Responses should consider
 the behavior, its impact, and whether it is repeated.
 
-Report concerns privately through an established maintainer contact channel.
-A public project contact will be listed once the repository is published.
+Report concerns privately to the maintainer at
+[suyashbalasubramaniam@gmail.com](mailto:suyashbalasubramaniam@gmail.com).
+Include enough context to assess the conduct while respecting personal privacy.
 Do not include private reports in unrelated public issue threads.

@@ -22,7 +22,8 @@ Interactive OAuth discovery, per-user permissions, scoped API keys, and API key
 administration are not implemented. Do not place unrelated public users behind
 the same instance and token.
 
-Use HTTPS through a reverse proxy for remote access. Keep the application port
+Use an encrypted route for remote access: HTTPS through a reverse proxy,
+a private VPN, or an SSH tunnel. Plain LAN HTTP exposes credentials and data. Keep the application port
 private, set exact Host/Origin allowlists, configure proxy connection/time limits,
 and protect credentials and backup files. Origin validation is not CORS support.
 The service does not trust forwarded headers for identity and never accepts
@@ -42,7 +43,16 @@ data rather than higher-priority instructions. Task claims are advisory workflow
 coordination; they do not lock files or stop a credential holder from
 impersonating another agent.
 
-Report suspected issues privately to your instance operator or the maintainer
-through an established private channel. Include reproduction steps with tokens,
-private project content, and database files removed. No public reporting address
-has been provisioned for this unpublished source package.
+## Reporting a vulnerability
+
+Email the maintainer privately at
+[suyashbalasubramaniam@gmail.com](mailto:suyashbalasubramaniam@gmail.com).
+Use a subject such as `Agent Context security report`. Include the affected
+version, impact, minimal reproduction, and relevant environment. Remove tokens,
+private project content, and real database files. Do not open a public issue
+with exploit details or credentials. Coordinate disclosure with the maintainer.
+
+This is the maintainer's contact address, not a dedicated security service.
+No guaranteed response time or formal support period is offered for this early
+release. Reports should target the current Node/React version. The retained
+Python prototype is historical and is not the active npm product.

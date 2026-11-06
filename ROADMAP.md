@@ -4,7 +4,7 @@ This roadmap describes planned work, not currently shipped capabilities.
 
 ## Open-source launch
 
-- Publish the source repository and its contribution guidelines.
+- Verify the public repository contains the current release commit and guides.
 - Run the configured desktop-platform, package, and container CI checks.
 - Publish the reviewed npm artifact under an available name owned by the maintainer.
 - Deploy the public website and verify its package/source downloads.
@@ -18,7 +18,8 @@ This roadmap describes planned work, not currently shipped capabilities.
 
 ## Agent experience
 
-- Optional client setup helpers with previewed configuration changes.
+- Optional client setup helpers that preview and merge configuration changes.
+  Read-only JSON generation and website/dashboard client selectors already ship.
 - Clearer stale-claim recovery and file-overlap visibility.
 - Session checkpoints and compact handoff templates.
 

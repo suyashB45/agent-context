@@ -2,6 +2,10 @@
 
 ## 0.4.0
 
+- Organize open-source onboarding, operations, compatibility, reference,
+  troubleshooting, contributor, and release guides; check documentation links
+  and current release filenames in CI and website builds.
+
 - Add generic, Cursor, VS Code/Copilot, and Gemini CLI configuration output.
 - Add client selection in the dashboard and website, shared-database setup,
   and guidance for remote MCP clients.

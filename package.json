@@ -24,7 +24,12 @@
     "docs/architecture.md",
     "docs/release.md",
     "docs/clients.md",
-    "docs/team.md"
+    "docs/team.md",
+    "docs/README.md",
+    "docs/compatibility.md",
+    "docs/operations.md",
+    "docs/reference.md",
+    "docs/troubleshooting.md"
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
@@ -37,7 +42,8 @@
     "site:serve": "node scripts/serve-site.mjs",
     "site:check": "node scripts/check-site.mjs",
     "prepack": "npm run build",
-    "vercel:build": "npm run build && npm pack --ignore-scripts --pack-destination dist/npm && npm run release:source && npm run site:build && npm run site:check"
+    "vercel:build": "npm run docs:check && npm run build && npm pack --ignore-scripts --pack-destination dist/npm && npm run release:source && npm run site:build && npm run site:check",
+    "docs:check": "node scripts/check-docs.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/server": "2.3.1",
