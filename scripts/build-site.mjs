@@ -46,7 +46,7 @@ await writeFile('site/dist/assets/favicon.svg', '<svg xmlns="http://www.w3.org/2
 await copyFile('LICENSE', 'site/dist/docs/LICENSE.txt');
 await mkdir('site/dist/assets/licenses', { recursive: true });
 for (const name of ['react', 'react-dom', 'scheduler']) await copyFile(`node_modules/${name}/LICENSE`, `site/dist/assets/licenses/${name}-LICENSE.txt`);
-const release = { name: pkg.name, version: pkg.version, npm_published: config.npmPublished, repository_url: config.repositoryUrl, downloads: [] };
+const release = { source_commit: process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA || null, name: pkg.name, version: pkg.version, npm_published: config.npmPublished, repository_url: config.repositoryUrl, downloads: [] };
 for (const item of files) {
   const name = item.path.split('/').at(-1), contents = await readFile(item.path);
   await copyFile(item.path, `site/dist/downloads/${name}`);

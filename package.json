@@ -43,7 +43,8 @@
     "site:check": "node scripts/check-site.mjs",
     "prepack": "npm run build",
     "vercel:build": "npm run docs:check && npm run build && npm pack --ignore-scripts --pack-destination dist/npm && npm run release:source && npm run site:build && npm run site:check",
-    "docs:check": "node scripts/check-docs.mjs"
+    "docs:check": "node scripts/check-docs.mjs",
+    "verify:launch": "node scripts/verify-launch.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/server": "2.3.1",

@@ -151,3 +151,30 @@ npm run site:serve
 ```
 
 Open http://127.0.0.1:8770. The MCP dashboard is a separate service on port 8765.
+
+## Automated live launch verification
+
+After pushing and deploying the intended commit, run from a clean source checkout
+with dependencies installed and working access to GitHub, npm, and the website:
+
+```bash
+npm run verify:launch -- --site https://agentcontext.suyashb.me
+```
+
+The command checks the push CI run and all four jobs for current main, public
+product/doc pages, both live download checksums, npm version/repository/integrity,
+identical website and registry npm tarballs, and a clean temporary installation
+of the website download. It verifies command shim, assets, version, and token
+creation. It does not drive a browser or third-party agent UI.
+
+The website manifest records `source_commit` from Vercel or GitHub's build
+environment. Older deployments without that field must be redeployed. If npm
+publication passes but the site still says pending, update the release status
+and redeploy before re-running the final check.
+
+The JSON report is saved to `dist/release/launch-verification.json`. Exit 0 means
+all checks passed; exit 1 means an observed mismatch/failure; exit 2 means checks
+are blocked by connectivity, permissions, or missing evidence. A network error
+is not proof a service is down or a package unpublished. Public GitHub API rate
+limits may require retrying later. This command never publishes or changes
+accounts and never announces a launch.

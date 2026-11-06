@@ -2,6 +2,9 @@
 
 ## 0.4.0
 
+- Add an explicit live launch verification command for current-main CI,
+  live downloads, npm publication, artifact consistency, and a clean install.
+
 - Organize open-source onboarding, operations, compatibility, reference,
   troubleshooting, contributor, and release guides; check documentation links
   and current release filenames in CI and website builds.
