@@ -8,8 +8,8 @@ export function Logo({ className = '' }) {
     <a className={`site-brand ${className}`.trim()} href="/" aria-label={`${siteBrand.name} home`}>
       <span className="site-logo" aria-hidden="true">
         <svg viewBox="0 0 30 30" fill="none">
-          <path d="M15 3 27 10v11l-12 7L3 21V10L15 3Z" stroke="currentColor" strokeWidth="1.5" />
-          <path d="m3 10 12 7 12-7M15 17v11M9 6.5l12 7v11" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M15 3 27 10v11l-12 7L3 21V10L15 3Z" stroke="var(--mint)" strokeWidth="1.5" />
+          <path d="m3 10 12 7 12-7M15 17v11M9 6.5l12 7v11" stroke="var(--blue)" strokeWidth="1.5" />
         </svg>
       </span>
       <span>

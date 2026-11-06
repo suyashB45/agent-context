@@ -16,6 +16,7 @@ export function Features() {
         <div className="lp-feature-grid">
           {featuresContent.items.map((feature, index) => (
             <Reveal key={feature.title} className="lp-feature-card" delay={index * 0.05}>
+              <span className="feature-index">{String(index + 1).padStart(2, '0')}</span>
               <span className="lp-feature-icon">
                 <Icon name={feature.icon} size={22} />
               </span>

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add a distinct green/blue/black website identity, centered install hero and
+  visual agent-to-memory handoff bridge, while retaining docs and setup flows.
+
 - Link the public scoped npm package and add README overview/workflow SVGs.
 
 - Rebuild the product website with Next.js App Router, Tailwind CSS and Framer

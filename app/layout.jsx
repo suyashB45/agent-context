@@ -1,4 +1,5 @@
 import './globals.css';
+import './identity.css';
 import { landingMeta, siteBrand } from '../site/src/content.js';
 import config from '../site/config.json';
 

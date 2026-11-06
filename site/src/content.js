@@ -14,7 +14,7 @@ export const landingMeta = {
   ogTitle: 'Agent Context — Shared memory for your coding agents',
   ogDescription:
     'One agent records the work; the next reads the context before continuing. Open-source project memory for MCP-compatible coding agents.',
-  themeColor: '#080b0a',
+  themeColor: '#05070b',
 };
 
 export const uiText = {
@@ -81,6 +81,23 @@ export const heroContent = {
   secondary: { label: 'View on GitHub', href: github },
   badges: ['MCP compatible', 'Local-first', 'MIT license', 'SQLite'],
   footnote: 'Node.js 24+ and npm required. No Python, cloud model or model API key.',
+  install: { command: `npm install -g ${config.packageName}`, label: 'Install from npm', href: npmUrl },
+  bridge: {
+    title: 'A shared thread between sessions',
+    project: 'project / launchpad',
+    label: 'Illustrative agent handoff using a shared local project record',
+    coreTitle: 'Agent Context',
+    coreLabel: 'Shared project memory',
+    coreTags: ['Context', 'Decisions', 'Handoffs'],
+    storage: 'Your computer or team server · SQLite',
+    console: 'Handoff activity',
+    agents: [
+      { id: 'A', label: 'Agent A', role: 'Finishing a session', command: 'record_update', state: 'Handoff recorded', items: ['Decisions and changed files', 'Test results and next steps'] },
+      { id: 'B', label: 'Agent B', role: 'Starting the next session', command: 'get_context', state: 'Context available', items: ['Read project memory', 'Claim the next task'] },
+    ],
+    clientLabel: 'Connect the tools you already use',
+    clients: ['Claude Code', 'Codex', 'Cursor', 'VS Code / Copilot', 'Gemini CLI', 'Other MCP clients'],
+  },
   terminal: {
     windowTitle: 'launchpad / shared context',
     protocol: 'stdio + Streamable HTTP',
