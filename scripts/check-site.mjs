@@ -12,7 +12,7 @@ async function visit(directory) {
   }
 }
 await visit(root);
-assert.equal(htmlFiles.length, 6, 'Landing page plus five documentation pages must be built.');
+assert.equal(htmlFiles.length, 7, 'Landing page plus six documentation pages must be built.');
 let links = 0;
 for (const file of htmlFiles) {
   const html = await readFile(file, 'utf8');
