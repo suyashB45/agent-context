@@ -75,8 +75,10 @@ or compatibility with every MCP client. Keep existing honest limits visible.
 
 Import the repository root (`./`). Use the Next.js preset, Node 24.x,
 `npm ci --ignore-scripts --no-audit --no-fund` to install,
-`npm run build` to build and `out` as the output directory. These settings are
-in `vercel.json`. Remove any old project-level override that uses `site/dist`.
+`npm run build` to build and `.next` as the Vercel output directory. These
+settings are in `vercel.json`. The Next.js adapter reads its manifests in
+`.next/` and handles the static export; `out/` is for local preview and checks.
+Do not configure the adapter’s output directory as `out` or `site/dist`.
 Update `origin` in `site/config.json` if the public domain changes. No database,
 instance token or model API key belongs in website environment variables.
 

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Fix Vercel deployment by pointing its Next.js adapter at `.next` build
+  manifests; retain `out/` for the static export and local checks.
+
 - Add a distinct green/blue/black website identity, centered install hero and
   visual agent-to-memory handoff bridge, while retaining docs and setup flows.
 

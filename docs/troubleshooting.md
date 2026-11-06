@@ -98,7 +98,7 @@ history. Task claims do not prevent overlapping file edits.
 ## Vercel shows a wrong page, build failure, or preset mismatch
 
 Import the entire repository with Root Directory `./`, preset **Next.js**, Node
-**24.x**, build `npm run build`, and output `out`. Keep
+**24.x**, build `npm run build`, and output `.next`. Keep
 `vercel.json` at the repository root. Read the first failed build step rather
 than only the final non-zero exit message. Ensure the deployed Git commit
 contains the current package and matching site configuration.
@@ -113,3 +113,12 @@ If listening sockets or child-process descriptors are blocked, do not interpret
 missing output as success. Run those checks on an unrestricted development host
 or CI. The documented optional skip is for two subprocess tests only; report it
 when used. Browser and Docker verification need their corresponding tools.
+
+### Vercel: NEXT_NO_ROUTES_MANIFEST
+
+If compilation and page checks pass but Vercel looks for
+`out/routes-manifest.json`, the Next.js adapter is using the static export
+folder as its build directory. Set Output Directory to `.next` and deploy the
+corrected commit. The tracked `vercel.json` pins that value. Keep `output:
+'export'` in `next.config.mjs`; `out/` remains the local static export. Do not
+copy or fabricate a routes manifest in `out/`.

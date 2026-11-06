@@ -104,7 +104,13 @@ Import the repository root, not the `site` subdirectory. The included
 | Node.js | 24.x |
 | Install Command | `npm ci --ignore-scripts --no-audit --no-fund` |
 | Build Command | `npm run build` |
-| Output Directory | `out` |
+| Output Directory | `.next` (Next.js adapter) |
+
+`out/` remains the generated static export used by the local preview and
+checks. Vercel’s Next.js adapter reads `.next/` build manifests before packaging
+that export. Do not point the adapter at `out/`; that causes
+`NEXT_NO_ROUTES_MANIFEST`. The repository configuration pins `.next` to override
+older project settings.
 
 No MCP instance token or model API key is needed to build this static site.
 Canonical links and the sitemap use `origin` in `site/config.json`. Use the actual successful
