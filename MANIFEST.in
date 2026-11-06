@@ -1,0 +1,6 @@
+include LICENSE README.md SECURITY.md CHANGELOG.md constraints.txt Dockerfile compose.yaml .env.example .dockerignore .gitignore
+recursive-include .github/workflows *.yml
+recursive-include examples *.md *.json *.toml Caddyfile
+recursive-include tests *.py
+recursive-include scripts *.py
+include docs/legacy-python.md

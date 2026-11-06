@@ -1,0 +1,29 @@
+services:
+  agent-context:
+    build: .
+    image: handoffra:0.4.0
+    init: true
+    restart: unless-stopped
+    env_file: .env
+    command: ["--allowed-host", "${HANDOFFRA_PUBLIC_HOST:-localhost}", "--allowed-origin", "${HANDOFFRA_PUBLIC_ORIGIN:-http://localhost:8765}"]
+    ports:
+      - "127.0.0.1:8765:8765"
+    volumes:
+      - context-data:/data
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    cap_drop: ["ALL"]
+    security_opt: ["no-new-privileges:true"]
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 1.0
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  context-data:

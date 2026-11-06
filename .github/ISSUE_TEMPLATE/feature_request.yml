@@ -1,0 +1,16 @@
+name: Feature request
+description: Propose an improvement to context sharing or self-hosting.
+body:
+  - type: textarea
+    id: use_case
+    attributes:
+      label: What are you trying to do?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the workflow and any alternatives you considered.
+    validations:
+      required: true

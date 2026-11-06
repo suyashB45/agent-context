@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Agent Context — Workspace</title>
+  <link rel="stylesheet" href="/assets/dashboard.css">
+  <script src="/assets/dashboard.js" defer></script>
+</head>
+<body>
+  <div id="login" class="login-screen">
+    <div class="login-card">
+      <div class="brand-symbol">ac<span>·</span></div>
+      <p class="eyebrow">YOUR AGENTS. ONE WORKSPACE.</p>
+      <h1>Pick up where<br>the last agent left off.</h1>
+      <p class="muted">Connect to your instance to see projects, decisions, and handoffs in one place.</p>
+      <form id="login-form">
+        <label for="access-token">Instance access token</label>
+        <input id="access-token" type="password" autocomplete="off" placeholder="Paste your access token" maxlength="512">
+        <p class="field-hint">Leave empty only if you enabled local development mode.</p>
+        <button class="button primary" type="submit">Open workspace <span aria-hidden="true">↗</span></button>
+        <p id="login-error" class="error" role="alert"></p>
+      </form>
+      <div class="login-footer"><span class="dot"></span> Self-hosted. Your context stays here.</div>
+    </div>
+    <div class="login-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="orbit orbit-three"></div><div class="art-center">ac<span>·</span></div><span class="art-label label-a">Claude</span><span class="art-label label-b">Codex</span><span class="art-label label-c">Your next agent</span><div class="art-caption">Different agents.<br><strong>Shared understanding.</strong></div></div>
+  </div>
+
+  <div id="workspace" class="workspace" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#overview"><span class="brand-symbol small">ac<span>·</span></span><span>Agent Context<small>WORKSPACE</small></span></a>
+      <div class="instance-pill"><span class="dot"></span><span>Self-hosted instance</span><span class="pill-arrow">⌄</span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav aria-label="Main navigation">
+        <a href="#overview" data-nav="overview" class="nav-link"><span aria-hidden="true">◫</span>Overview</a>
+        <a href="#projects" data-nav="projects" class="nav-link"><span aria-hidden="true">▦</span>Projects<span id="nav-count" class="nav-count">0</span></a>
+        <a href="#agents" data-nav="agents" class="nav-link"><span aria-hidden="true">✧</span>Agents</a>
+        <a href="#activity" data-nav="activity" class="nav-link"><span aria-hidden="true">≋</span>Activity</a>
+        <a href="#connect" data-nav="connect" class="nav-link"><span aria-hidden="true">⌘</span>Connect agents</a>
+      </nav>
+      <div class="sidebar-bottom"><div class="sidebar-note"><span class="dot"></span><strong>One source of context</strong><p>Every handoff makes the next session a little smarter.</p></div><button id="disconnect" class="disconnect">Disconnect instance <span>↗</span></button></div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar"><div><span class="muted">Workspace</span><span class="breadcrumb">/</span><span id="breadcrumb">Overview</span></div><div class="topbar-right"><span id="sync-status" class="live-status"><span class="dot"></span>Connected</span><button id="refresh" class="icon-button" aria-label="Refresh workspace">↻</button></div></header>
+      <main>
+        <div id="notice" class="notice" role="status" hidden></div>
+        <section id="view-overview" class="view">
+          <div class="page-heading"><div><p class="eyebrow">A LITTLE CONTEXT GOES A LONG WAY</p><h1>Your workspace, in sync.</h1><p class="muted">Everything your agents have done. Everything that comes next.</p></div><button class="button primary" data-action="new-project"><span>+</span> New project</button></div>
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-top">Projects<span>▦</span></div><strong id="stat-projects">0</strong><p>Shared spaces for your work</p></article>
+            <article class="stat-card"><div class="stat-top">Open tasks<span>◷</span></div><strong id="stat-tasks">0</strong><p id="stat-completed">0 tasks completed</p></article>
+            <article class="stat-card"><div class="stat-top">Recent updates<span>↗</span></div><strong id="stat-updates">0</strong><p>Recorded in the last 24 hours</p></article>
+            <article class="stat-card"><div class="stat-top">Contributing agents<span>✧</span></div><strong id="stat-agents">0</strong><p>Reporting work in the last 24 hours</p></article>
+          </div>
+          <div class="overview-grid"><article class="panel"><div class="panel-heading"><h2>Your projects <span id="project-count" class="count-badge">0</span></h2><a href="#projects" class="text-link">View all ↗</a></div><div id="overview-projects"></div></article><article class="panel"><div class="panel-heading"><h2>Latest handoffs</h2><span class="subtle-label">PASSING THE BATON</span></div><div id="overview-handoffs"></div></article></div>
+          <article class="panel recent-panel"><div class="panel-heading"><h2>Workspace activity</h2><a href="#activity" class="text-link">All activity ↗</a></div><div id="overview-activity"></div></article>
+          <div class="connect-banner"><div class="banner-icon">⌘</div><div><h3>Great work deserves a good handoff.</h3><p>Connect Claude, Codex, or any MCP-compatible agent to keep your project moving.</p></div><a href="#connect" class="button secondary">Connect an agent ↗</a></div>
+        </section>
+
+        <section id="view-projects" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">A HOME FOR EVERY BUILD</p><h1>Projects</h1><p class="muted">Give every agent the same starting point.</p></div><button class="button primary" data-action="new-project">+ New project</button></div>
+          <div class="project-layout"><article class="panel project-selector"><div class="panel-heading"><h2>All projects</h2></div><div id="project-list"></div><button id="more-projects" class="button quiet full" hidden>Load more projects</button></article><div id="project-detail"><article class="panel empty-selection"><span class="empty-glyph">▦</span><h2>Select a project</h2><p class="muted">Explore its tasks, decisions, and the latest handoff.</p></article></div></div>
+        </section>
+
+        <section id="view-agents" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">THE HANDS BEHIND THE WORK</p><h1>Agents</h1><p class="muted">See who has contributed and which tasks they hold.</p></div><a href="#connect" class="button secondary">Connect an agent ↗</a></div>
+          <article class="panel"><div class="panel-heading"><h2>Reporting agents</h2><span class="subtle-label">BASED ON RECORDED ACTIVITY</span></div><div id="agents-list"></div><button id="more-agents" class="button quiet full" hidden>Load more agents</button></article>
+          <p class="field-hint">Agent names are reported by clients. Last activity indicates a recorded update, not a live connection.</p>
+        </section>
+
+        <section id="view-activity" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">THE STORY OF YOUR BUILD</p><h1>Activity</h1><p class="muted">A timeline of progress, decisions, and handoffs.</p></div><span class="auto-refresh">Refreshes every 8 seconds</span></div>
+          <div class="filter-bar"><label>Project<select id="activity-project"><option value="">All projects</option></select></label><label>Type<select id="activity-kind"><option value="">All updates</option><option value="handoff">Handoffs</option><option value="decision">Decisions</option><option value="progress">Progress</option><option value="blocker">Blockers</option><option value="test">Tests</option><option value="note">Notes</option><option value="task_created">Tasks created</option><option value="task_claimed">Tasks claimed</option><option value="task_updated">Tasks updated</option></select></label></div>
+          <article class="panel"><div id="activity-list"></div><button id="more-activity" class="button quiet full" hidden>Load earlier activity</button></article>
+        </section>
+
+        <section id="view-connect" class="view" hidden>
+          <div class="page-heading"><div><p class="eyebrow">MANY AGENTS. ONE CONTEXT.</p><h1>Connect your agents.</h1><p class="muted">Set it up once. Keep the whole project in the loop.</p></div><span class="tag green">MCP ready</span></div>
+          <div class="endpoint-card"><div><span class="eyebrow">YOUR MCP ENDPOINT</span><code id="endpoint-url"></code></div><button id="copy-endpoint" class="button secondary">Copy endpoint</button></div>
+          <div class="connect-grid"><article class="panel setup-card"><div class="provider-mark">C</div><h2>Codex</h2><p class="muted">Export your instance token in the terminal that launches Codex. Then register this server:</p><pre id="codex-command"></pre><button class="button quiet" data-copy="codex-command">Copy command</button><p class="field-hint">Restart existing Codex sessions after connecting.</p></article><article class="panel setup-card"><div class="provider-mark claude-mark">✳</div><h2>Claude Code</h2><p class="muted">Use the same instance token, then add this server to your Claude Code configuration:</p><pre id="claude-command"></pre><button class="button quiet" data-copy="claude-command">Copy command</button><p class="field-hint">Claude saves the resolved token in its client configuration.</p></article></div>
+          <article class="panel workflow-card"><span class="step-number">02</span><div><h2>Teach your agents the handoff habit.</h2><p class="muted">Add this to your project's AGENTS.md and CLAUDE.md. Replace my-project with its project ID.</p><pre id="agent-instructions">Use agent-context MCP for project ID "my-project".
+Read get_context and list_tasks before working.
+Use a unique agent_id and claim a task before editing.
+Record progress, changed files, decisions, and test results.
+Before stopping, leave a handoff and complete or release your task.</pre><button class="button quiet" data-copy="agent-instructions">Copy instructions</button></div></article>
+        </section>
+        <footer class="page-footer"><span>Agent Context <span class="footer-dot">·</span> Built for continuity.</span><span>Self-hosted workspace</span></footer>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="editor-dialog"><form id="editor-form"><div class="dialog-heading"><div><p class="eyebrow" id="editor-eyebrow">WORKSPACE</p><h2 id="editor-title">New project</h2></div><button type="button" id="close-dialog" class="icon-button" aria-label="Close dialog">×</button></div><div id="editor-fields"></div><p id="editor-error" class="error" role="alert"></p><div class="dialog-actions"><button type="button" id="cancel-dialog" class="button secondary">Cancel</button><button type="submit" id="save-editor" class="button primary">Create project</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

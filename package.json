@@ -1,0 +1,61 @@
+{
+  "name": "handoffra",
+  "version": "0.4.0",
+  "description": "Self-hosted MCP project memory with a React dashboard for coding agents",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "handoffra": "bin/handoffra.mjs"
+  },
+  "files": [
+    "bin/",
+    "build/npm/",
+    "examples/",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "ROADMAP.md",
+    "docs/architecture.md",
+    "docs/release.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "node bin/handoffra.mjs dashboard",
+    "test": "node --test --test-isolation=none --test-concurrency=1 node-tests/*.test.mjs",
+    "check": "node scripts/check.mjs",
+    "test:package": "node scripts/verify-package.mjs",
+    "release:source": "node scripts/source-archive.mjs",
+    "site:build": "node scripts/build-site.mjs",
+    "site:serve": "node scripts/serve-site.mjs",
+    "site:check": "node scripts/check-site.mjs",
+    "prepack": "npm run build",
+    "vercel:build": "npm run build && npm pack --ignore-scripts --pack-destination dist/npm && npm run release:source && npm run site:build && npm run site:check"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/server": "2.3.1",
+    "@modelcontextprotocol/client": "2.3.1",
+    "zod": "4.4.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "esbuild": "0.25.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "mcp",
+    "agents",
+    "context",
+    "handoff",
+    "react",
+    "self-hosted",
+    "claude",
+    "codex"
+  ]
+}

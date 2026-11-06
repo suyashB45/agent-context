@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-context-mcp"
+dynamic = ["version"]
+description = "Persistent project context and task handoffs between coding agents"
+requires-python = ">=3.11"
+readme = "docs/legacy-python.md"
+license = "MIT"
+keywords = ["mcp", "agents", "context", "handoff", "self-hosted"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = ["mcp>=2.3,<3", "starlette>=1.10,<2", "uvicorn>=0.54,<1", "anyio>=4.16,<5"]
+
+[project.optional-dependencies]
+dev = ["build>=1.2,<2", "ruff>=0.14,<1", "httpx2>=2.16,<3"]
+
+[project.scripts]
+agent-context-mcp = "agent_context_mcp.server:main"
+
+[tool.setuptools.packages.find]
+include = ["agent_context_mcp*"]
+
+[tool.setuptools.dynamic]
+version = {attr = "agent_context_mcp.__version__"}
+
+[tool.setuptools.package-data]
+agent_context_mcp = ["static/*.html", "static/*.css", "static/*.js"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
