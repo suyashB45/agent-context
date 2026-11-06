@@ -22,7 +22,8 @@
     "CODE_OF_CONDUCT.md",
     "ROADMAP.md",
     "docs/architecture.md",
-    "docs/release.md"
+    "docs/release.md",
+    "docs/clients.md"
   ],
   "scripts": {
     "build": "node scripts/build.mjs",

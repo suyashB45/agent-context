@@ -1,0 +1,13 @@
+{
+  "servers": {
+    "agent-context": {
+      "type": "stdio",
+      "command": "agent-context-mcp",
+      "args": [
+        "stdio",
+        "--db",
+        "/absolute/path/to/shared/context.sqlite3"
+      ]
+    }
+  }
+}

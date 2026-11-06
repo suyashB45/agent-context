@@ -6,3 +6,5 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 
 .hero-install-note{font-size:11px;line-height:1.6;color:var(--muted);margin:10px 0 0}
+
+.docs-content select{display:block;max-width:100%;margin:10px 0 18px;padding:10px 14px;border:1px solid #304839;border-radius:6px;background:#101a14;color:#d9ebe0;font:inherit}

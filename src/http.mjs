@@ -66,6 +66,7 @@ export function createApplication(input, options = {}) {
     const path = url.pathname, params = url.searchParams;
     if (request.method === 'GET') {
       if (path === '/readyz') return json(store.check());
+      if (path === '/api/connection') return json({ database: config.database });
       if (path === '/api/overview') return json(store.overview());
       if (path === '/api/projects') return json(store.listProjects({ limit: number(params, 'limit', 50), offset: number(params, 'offset', 0) }));
       if (path === '/api/agents') return json(store.agents({ limit: number(params, 'limit', 50), offset: number(params, 'offset', 0) }));

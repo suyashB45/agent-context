@@ -110,6 +110,19 @@ Stop an older server using port 8765 before starting this version, or choose
 
 ## Connect coding agents
 
+Use any coding agent that supports MCP tools over stdio or Streamable HTTP.
+Generate local client configuration with the shared database path:
+
+```bash
+agent-context-mcp config --client generic --db /absolute/path/to/shared/context.sqlite3
+```
+
+Use `--client cursor`, `--client vscode`, or `--client gemini` for those formats.
+Merge the printed server entry into existing client settings. The command does
+not modify files. The dashboard’s Connect agents screen provides copyable JSON
+using the running server’s database path. Agents without MCP support need an MCP
+integration. See [the client guide](docs/clients.md) for setup and verification.
+
 ### Local stdio
 
 Each agent launches a process sharing the same database. No HTTP service or

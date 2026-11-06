@@ -12,7 +12,7 @@ test('public React shell and assets contain no credentials; data requires bearer
     assert.ok(result.headers.get('content-security-policy').includes("frame-ancestors 'none'"));
   }
   const root = await app.fetch(request('/')); assert.equal(root.status, 307); assert.equal(root.headers.get('location'), '/dashboard');
-  for (const path of ['/api/overview', '/api/projects', '/api/agents', '/api/activity', '/readyz']) {
+  for (const path of ['/api/connection', '/api/overview', '/api/projects', '/api/agents', '/api/activity', '/readyz']) {
     const result = await app.fetch(request(path, { headers: { Authorization: 'Bearer wrong' } }));
     assert.equal(result.status, 401); assert.ok(result.headers.get('www-authenticate').startsWith('Bearer'));
     assert.ok(result.headers.get('x-request-id')); assert.equal(result.headers.get('cache-control'), 'no-store');
@@ -89,4 +89,13 @@ test('real SDK HTTP clients list tools and share handoffs across app restart', {
     const resource = await second.readResource({ uri: 'context://projects/shared' }); assert.ok(resource.contents[0].text.includes('Ready for agent B'));
     const invalid = await second.callTool({ name: 'get_context', arguments: { project_id: 'missing' } }); assert.equal(invalid.isError, true);
   } finally { await second?.close(); await restarted.close(); }
+});
+
+test('connection setup exposes the actual shared database only with authentication', async (t) => {
+  const { app } = fixture(t, true);
+  const response = await app.fetch(request('/api/connection'));
+  assert.equal(response.status, 200);
+  const connection = await response.json();
+  assert.equal(connection.database, app.config.database);
+  assert.equal(JSON.stringify(connection).includes(TOKEN), false);
 });

@@ -1,3 +1,4 @@
+import { clientConfiguration } from './client-config.mjs';
 import { parseArgs } from 'node:util';
 import { resolve } from 'node:path';
 import { serveStdio } from '@modelcontextprotocol/server/stdio';
@@ -8,16 +9,18 @@ import { createApplication, nodeServer } from './http.mjs';
 
 const HELP = `Agent Context ${VERSION}
 
-Usage: agent-context-mcp [dashboard|stdio|token|keygen|check|backup] [options]
+Usage: agent-context-mcp [dashboard|stdio|config|token|keygen|check|backup] [options]
 
   dashboard    Start the React dashboard and HTTP MCP service (default)
   stdio        Start an MCP subprocess for coding agents; also --mcp
+  config       Print MCP client JSON without changing any files
   token        Show or provision the local instance access token
   keygen       Generate a fresh token
   check        Check an existing database for integrity
   backup       Back up an existing database to --output (never overwrites)
 
 Options:
+  --client NAME           config: generic, cursor, vscode, gemini
   --db PATH               SQLite file (also AGENT_CONTEXT_DB)
   --host HOST             Bind address (default 127.0.0.1)
   --port PORT             HTTP port (default 8765)
@@ -36,7 +39,7 @@ Requires Node.js 24 or newer. No Python, native compilation or API key needed.
 
 export async function main(argv = process.argv.slice(2)) {
   const { values, positionals } = parseArgs({ args: argv, allowPositionals: true, options: {
-    db: { type: 'string' }, host: { type: 'string' }, port: { type: 'string' },
+    client: { type: 'string' }, db: { type: 'string' }, host: { type: 'string' }, port: { type: 'string' },
     'token-file': { type: 'string' }, output: { type: 'string' }, transport: { type: 'string' },
     'allowed-host': { type: 'string', multiple: true }, 'allowed-origin': { type: 'string', multiple: true },
     'allow-unauthenticated-local': { type: 'boolean' }, mcp: { type: 'boolean' },
@@ -50,9 +53,14 @@ export async function main(argv = process.argv.slice(2)) {
   if (transport && !['stdio', 'streamable-http'].includes(transport)) throw new Error('Unknown transport.');
   let action = values.mcp ? 'stdio' : (positionals[0] || (transport === 'stdio' ? 'stdio' : 'dashboard'));
   if (action === 'serve') action = transport === 'stdio' ? 'stdio' : 'dashboard';
-  if (!['dashboard', 'stdio', 'token', 'keygen', 'check', 'backup'].includes(action)) throw new Error('Unknown action. Run --help.');
+  if (!['dashboard', 'stdio', 'config', 'token', 'keygen', 'check', 'backup'].includes(action)) throw new Error('Unknown action. Run --help.');
+  if (values.client && action !== 'config') throw new Error('--client is only supported with config.');
   if (action === 'keygen') { console.log(keygen()); return; }
   const database = resolve(values.db || environmentValue('DB') || defaultDatabase());
+  if (action === 'config') {
+    if (transport && transport !== 'stdio') throw new Error('config generates local stdio configuration. For HTTP, use the dashboard connection guide.');
+    console.log(JSON.stringify(clientConfiguration({ client: values.client, database }), null, 2)); return;
+  }
   if (action === 'token') { console.log(localToken(database, values['token-file'])); return; }
   if (['backup', 'check'].includes(action)) {
     existingDatabase(database);
