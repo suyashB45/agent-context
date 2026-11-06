@@ -52,7 +52,7 @@ function InstallSteps() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="container footer-main"><div><Logo /><p>Continuity for the way you build.</p></div><div className="footer-links"><a href="/docs/">Documentation</a><a href={sourceUrl}>{config.repositoryUrl ? 'GitHub' : 'Source code'}</a><a href="/docs/contributing/">Contribute</a><a href="/docs/LICENSE.txt">MIT license</a>{profileLinks.map(({ label, url }) => <a href={url} key={url}>{label}</a>)}</div><span className="footer-note">Self-hosted. Open source.<br />Made for shared understanding.</span></div><div className="container footer-bottom"><span>Agent Context · v{config.version}</span><a href="/downloads/release.json">Release checksums <Arrow diagonal /></a></div></footer>;
+  return <footer className="site-footer"><div className="container footer-main"><div><Logo /><p>Continuity for the way you build.</p>{config.creatorName && <p>Built by {config.creatorName}.</p>}</div><div className="footer-links"><a href="/docs/">Documentation</a><a href={sourceUrl}>{config.repositoryUrl ? 'GitHub' : 'Source code'}</a><a href="/docs/contributing/">Contribute</a><a href="/docs/LICENSE.txt">MIT license</a>{profileLinks.map(({ label, url }) => <a href={url} key={url}>{label}</a>)}</div><span className="footer-note">Self-hosted. Open source.<br />Made for shared understanding.</span></div><div className="container footer-bottom"><span>Agent Context · v{config.version}</span><a href="/downloads/release.json">Release checksums <Arrow diagonal /></a></div></footer>;
 }
 
 export function LandingPage() {
