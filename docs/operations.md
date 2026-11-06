@@ -44,7 +44,7 @@ Install Node.js 24+, npm, Docker, and Docker Compose. From the repository root:
 
 ```bash
 npm ci
-npm run build
+npm run build:runtime
 node bin/agent-context.mjs keygen
 ```
 

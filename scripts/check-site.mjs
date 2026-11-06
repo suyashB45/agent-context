@@ -3,12 +3,12 @@ import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 
-const root = resolve('site/dist');
+const root = resolve('out');
 const htmlFiles = [];
 async function visit(directory) {
   for (const entry of await readdir(directory, { withFileTypes: true })) {
     const path = join(directory, entry.name);
-    if (entry.isDirectory()) await visit(path); else if (entry.name.endsWith('.html')) htmlFiles.push(path);
+    if (entry.isDirectory()) await visit(path); else if (entry.name.endsWith('.html') && !/\b404\b|_not-found/.test(path)) htmlFiles.push(path);
   }
 }
 await visit(root);

@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+- Rebuild the product website with Next.js App Router, Tailwind CSS and Framer
+  Motion, including dark/light themes, accessible tabs and mobile navigation.
+- Add a terminal handoff illustration, interactive example dashboard, team
+  connection guidance and editable roadmap content.
+- Export the website to `out/` using `npm run build`; retain `build:runtime`
+  for the MCP service, package preparation and Docker.
+- Update contributor/deployment docs and retain the exact published npm archive
+  for website downloads. The public npm release remains 0.4.0.
+
+
 ## 0.4.0
 
 - Use npm package `@suyashb/agent-context` and executable `agent-context` to

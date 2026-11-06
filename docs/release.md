@@ -30,11 +30,10 @@ npm run check
 npm run docs:check
 npm run build
 npm test
-npm run vercel:build
 npm run test:package
 ```
 
-`vercel:build` builds the runtime, packages the installable archive, exports
+`npm run build` builds the runtime, packages the installable archive, exports
 allowlisted source, builds the website, and checks its pages/downloads.
 `test:package` performs a clean offline installation of the prepared tarball.
 It requires working subprocess descriptors. Do not silently skip failures.
@@ -52,8 +51,8 @@ The generated files for this version are:
 | --- | --- |
 | npm package | `dist/npm/suyashb-agent-context-0.4.0.tgz` |
 | source archive | `dist/release/suyashb-agent-context-0.4.0-source.tar.gz` |
-| product website | `site/dist/` |
-| download sizes and SHA-256 digests | `site/dist/downloads/release.json` |
+| product website | `out/` |
+| download sizes and SHA-256 digests | `out/downloads/release.json` |
 
 Review archive entries before sharing. The source archive contains a per-file
 `SOURCE-MANIFEST.json`. The npm package bundles its runtime, dashboard, and
@@ -101,15 +100,14 @@ Import the repository root, not the `site` subdirectory. The included
 | Setting | Value |
 | --- | --- |
 | Root Directory | `./` |
-| Application / Framework Preset | Other |
+| Application / Framework Preset | Next.js |
 | Node.js | 24.x |
 | Install Command | `npm ci --ignore-scripts --no-audit --no-fund` |
-| Build Command | `npm run vercel:build` |
-| Output Directory | `site/dist` |
+| Build Command | `npm run build` |
+| Output Directory | `out` |
 
 No MCP instance token or model API key is needed to build this static site.
-The build uses the Vercel deployment hostname for canonical links unless
-`SITE_URL` or `site/config.json` sets a public origin. Use the actual successful
+Canonical links and the sitemap use `origin` in `site/config.json`. Use the actual successful
 deployment URL; a requested project name is not proof of an available domain.
 See [Vercel configuration](https://vercel.com/docs/project-configuration/vercel-json).
 
@@ -125,8 +123,7 @@ its build output is deployed by Vercel.
 ## 6. Connect a custom domain
 
 Add the actual domain in Vercel Project Settings > Domains. Apply the exact
-DNS records Vercel provides at the domain registrar. Set production environment
-variable `SITE_URL=https://your-domain.example` and redeploy. Use an origin
+DNS records Vercel provides at the domain registrar. Set `origin` in `site/config.json` to the new public HTTPS URL and redeploy. Use an origin
 without a path, query, fragment, or credentials. Verify DNS, HTTPS, canonical
 URLs, and sitemap after deployment. Do not put a personal portfolio URL here
 unless it actually hosts this product website.

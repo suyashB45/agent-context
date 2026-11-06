@@ -22,3 +22,9 @@ access-token
 .sites-runtime/
 site/.openai/
 .vercel/
+
+.next/
+out/
+public/downloads/
+public/licenses/
+public/docs/

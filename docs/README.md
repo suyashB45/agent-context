@@ -48,3 +48,5 @@ The configured CI targets Linux, macOS, Windows, and a container; configuration
 alone is not proof those jobs passed. Automated checks have run in the current
 Linux environment. Every editor UI, operating system, local model, and network
 recipe has not been verified. See [compatibility](compatibility.md).
+
+For product website contributors, see [website development](website.md).

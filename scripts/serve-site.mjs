@@ -4,7 +4,7 @@ import { stat } from 'node:fs/promises';
 import { extname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const root = resolve(fileURLToPath(new URL('../site/dist/', import.meta.url)));
+const root = resolve(fileURLToPath(new URL('../out/', import.meta.url)));
 const types = { '.html': 'text/html; charset=utf-8', '.js': 'application/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain; charset=utf-8', '.tgz': 'application/gzip', '.gz': 'application/gzip' };
 const server = createServer(async (request, response) => {
   try {

@@ -13,8 +13,8 @@ const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
 const prefix = releaseBasename(pkg.name, pkg.version);
 const destination = join(root, 'dist/release', `${prefix}-source.tar.gz`);
 const files = [];
-const topFiles = ['vercel.json', 'package.json', 'package-lock.json', 'README.md', 'LICENSE', 'SECURITY.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'ROADMAP.md', 'Dockerfile', 'compose.yaml', '.env.example', '.gitignore', '.dockerignore', 'pyproject.toml', 'MANIFEST.in', 'constraints.txt', 'site/config.json', 'site/published-release.json', 'site/.gitignore'];
-const roots = ['src', 'web', 'bin', 'node-tests', 'examples', 'docs', '.github', 'agent_context_mcp', 'tests', 'site/src'];
+const topFiles = ['next.config.mjs', 'postcss.config.mjs', 'vercel.json', 'package.json', 'package-lock.json', 'README.md', 'LICENSE', 'SECURITY.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'ROADMAP.md', 'Dockerfile', 'compose.yaml', '.env.example', '.gitignore', '.dockerignore', 'pyproject.toml', 'MANIFEST.in', 'constraints.txt', 'site/config.json', 'site/published-release.json', 'site/.gitignore'];
+const roots = ['app', 'src', 'web', 'bin', 'node-tests', 'examples', 'docs', '.github', 'agent_context_mcp', 'tests', 'site/src'];
 
 async function collect(path) {
   const stat = await lstat(path);

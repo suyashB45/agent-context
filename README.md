@@ -63,7 +63,7 @@ From the repository root containing `package.json`:
 
 ```bash
 npm ci
-npm run build
+npm run build:runtime
 npm start -- --db ./data/dev.sqlite3
 ```
 
@@ -75,7 +75,7 @@ node bin/agent-context.mjs token --db ./data/dev.sqlite3
 
 This runs the Node/React application without a global install. Generated
 `build/` and `dist/` files are not committed to Git. To build and install the
-shareable npm package after `npm run build`:
+shareable npm package after `npm run build:runtime`:
 
 ```bash
 npm pack --ignore-scripts --pack-destination dist/npm
@@ -197,3 +197,15 @@ reference. Its executable is `agent-context-mcp`; the Node release uses
 `agent-context`, so the commands are distinct. Keep the same explicit `--db`
 when migrating an existing database. See the
 [legacy Python guide](https://github.com/suyashB45/agent-context/blob/main/docs/legacy-python.md).
+
+## Product website development
+
+The public product website is https://agentcontext.suyashb.me. End users only
+run the MCP service and dashboard locally. The website source uses Next.js App
+Router, Tailwind CSS and Framer Motion; it is separate from the MCP runtime.
+
+For website contributors, see [website development](docs/website.md).
+`npm run build` generates and checks the full static website in `out/`, with
+its docs and verified downloads. Vercel imports the repository root using the
+Next.js preset and that build command. `npm run build:runtime` only builds the
+MCP service and local React dashboard.

@@ -5,7 +5,7 @@ RUN npm ci --ignore-scripts --no-audit --no-fund
 COPY src ./src
 COPY web ./web
 COPY scripts/build.mjs ./scripts/build.mjs
-RUN npm run build
+RUN npm run build:runtime
 
 FROM node:24-bookworm-slim
 ENV NODE_ENV=production \

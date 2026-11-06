@@ -21,7 +21,7 @@ For a source checkout, generate the ignored build artifacts first:
 
 ```bash
 npm ci
-npm run build
+npm run build:runtime
 npm pack --ignore-scripts --pack-destination dist/npm
 npm install -g ./dist/npm/suyashb-agent-context-0.4.0.tgz
 ```
@@ -97,8 +97,8 @@ history. Task claims do not prevent overlapping file edits.
 
 ## Vercel shows a wrong page, build failure, or preset mismatch
 
-Import the entire repository with Root Directory `./`, preset **Other**, Node
-**24.x**, build `npm run vercel:build`, and output `site/dist`. Keep
+Import the entire repository with Root Directory `./`, preset **Next.js**, Node
+**24.x**, build `npm run build`, and output `out`. Keep
 `vercel.json` at the repository root. Read the first failed build step rather
 than only the final non-zero exit message. Ensure the deployed Git commit
 contains the current package and matching site configuration.

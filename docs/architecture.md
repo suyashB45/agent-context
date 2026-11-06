@@ -49,8 +49,12 @@ client-specific JSON wrapper. The CLI prints it without editing files. The
 running dashboard gets its database path through the authenticated
 `/api/connection` endpoint; copied local configs are for that host computer.
 
-`site/src/` is a separate React product website. Its build prerenders docs,
-creates a sitemap, and serves copies of the reviewed npm/source archives. It
+`app/` contains the product website’s Next.js App Router routes, metadata,
+sitemap and global Tailwind stylesheet. `site/src/sections/` has one React
+component per landing section; `site/src/content.js` centralizes landing copy
+and editable roadmap items. Framer Motion handles reduced-motion-aware
+transitions. The static export in `out/` includes the docs and verified
+npm/source archives. See [website development](website.md). It
 contains no MCP instance database or credentials. `vercel.json` deploys that
 static output. See [operations](operations.md), [reference](reference.md), and
 [team networking](team.md) for runtime setup.

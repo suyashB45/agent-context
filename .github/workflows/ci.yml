@@ -19,7 +19,7 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci --ignore-scripts --no-audit --no-fund
-      - run: npm run build
+      - run: npm run build:runtime
       - run: npm run check
       - run: npm run docs:check
       - run: npm test
@@ -40,7 +40,7 @@ jobs:
         with:
           name: launch-site-and-source
           path: |
-            site/dist/
+            out/
             dist/release/
   container:
     runs-on: ubuntu-latest

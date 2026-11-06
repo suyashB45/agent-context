@@ -13,7 +13,7 @@ clone your fork, and create a branch. From the repository root:
 
 ```bash
 npm ci
-npm run build
+npm run build:runtime
 npm run check
 npm run docs:check
 npm test
@@ -33,15 +33,19 @@ issues. See [architecture](docs/architecture.md) for the source layout.
 ## Website and release artifacts
 
 ```bash
-npm run vercel:build
-npm run site:serve
+npm run build
+npm run site:preview
 ```
 
-Preview the product site at http://127.0.0.1:8770. The build prepares the npm
+Preview the product site at http://127.0.0.1:8770. For live editing, use `npm run site:serve -- --port 8770` after the full build.
+The build prepares the npm
 package and source downloads before building and checking the website.
 Port 8770 is the product website; port 8765 is the running MCP dashboard.
 Illustrative demos must remain labeled. Do not invent adoption statistics,
 client verification, release status, or passed CI results.
+
+Edit landing-page copy and roadmap placeholders in `site/src/content.js`.
+See [website architecture and accessibility checks](docs/website.md).
 
 ## Choose and validate work
 
@@ -52,12 +56,12 @@ branch and update documentation when behavior or options change.
 | Change | Relevant checks |
 | --- | --- |
 | Documentation | `npm run docs:check`; rebuild/check the website if its content changed |
-| Server or dashboard | `npm run build`, `npm run check`, `npm test` |
-| Package | `npm run vercel:build`, `npm run test:package` |
+| Server or dashboard | `npm run build:runtime`, `npm run check`, `npm test` |
+| Package | `npm run build`, `npm run test:package` |
 | Container | Build Docker image and run `node scripts/test-container.mjs` as CI does |
 
 The package verification command expects the tarball prepared by
-`npm run vercel:build`. Container verification uses the `agent-context:ci`
+`npm run build`. Container verification uses the `agent-context:ci`
 image; build it with `docker build -t agent-context:ci .` first.
 
 If subprocess descriptors are blocked, the POSIX command
