@@ -51,11 +51,23 @@ client guide. They use the same MCP tools and database as every other client.
 Run Agent Context on a persistent server reachable by the client. Select
 Streamable HTTP in the client’s MCP setup, use the server’s `/mcp` URL, and
 configure `Authorization: Bearer <instance-token>` through the client’s secret
-settings. Follow that client’s header configuration format. Use HTTPS for
-remote access and exact Host/Origin allowlists as described in the README.
+settings. Follow that client’s header configuration format. Choose a network
+method from the [team connection guide](team.md):
+
+| Method | Client endpoint |
+| --- | --- |
+| Same Wi-Fi / LAN | Host private IP, such as `http://192.168.1.50:8765/mcp` |
+| Private VPN | VPN-reachable address or private HTTPS hostname |
+| SSH tunnel | `http://127.0.0.1:8765/mcp` while the forwarding tunnel is open |
+| Shared HTTPS server | Your reverse-proxy domain, such as `https://context.example.com/mcp` |
+
+Replace example addresses with your actual host. Use the host's token and
+configure exact Host/Origin allowlists. Plain LAN HTTP is unencrypted; prefer
+VPN, SSH, or HTTPS for routine team access.
 
 `localhost` always refers to the computer running the client. A cloud coding
-agent cannot reach your laptop’s localhost. The public Vercel website hosts
+agent cannot reach your laptop’s localhost by default. With an explicitly
+configured SSH forwarding tunnel, a local endpoint can reach the shared server. The public Vercel website hosts
 documentation and downloads; it is not your SQLite MCP instance.
 
 ## Shared workflow

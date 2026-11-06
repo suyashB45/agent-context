@@ -389,8 +389,24 @@ See [the deployment and release guide](docs/release.md) for DNS and npm publishi
 
 ## Connect your team
 
-Teammates can use one shared server through the same Wi-Fi/LAN, a private VPN,
-an SSH tunnel, or an always-on HTTPS endpoint. Each uses Streamable HTTP with
-the host's token and the same project ID. See [team connection methods](docs/team.md)
-for commands, allowlists, and troubleshooting. Keep one persistent database on
-the host; teammates do not need separate copies.
+Run one server with one persistent SQLite database. Teammates connect their own
+coding agents using Streamable HTTP, the host's access token, and the same
+project ID. Use a unique agent ID for each session.
+
+| Method | Best fit | Setup |
+| --- | --- | --- |
+| Same Wi-Fi / LAN | One private office or home network | Host private IP, exact allowlists, and firewall access |
+| Private VPN | Teammates in different locations | Authorized VPN access and a reachable private endpoint |
+| SSH tunnel | Existing SSH access | Forward a local port to the loopback-only server |
+| HTTPS server | Always-on shared service | Persistent host, domain, and TLS reverse proxy |
+
+See [team connection methods](docs/team.md) or the website's `/docs/team/` for
+commands, token setup, and troubleshooting. Plain LAN HTTP is unencrypted;
+prefer VPN, SSH, or HTTPS for routine team access. Every token holder can access
+all projects in that instance; individual accounts and project permissions are
+not implemented. Keep separate instances for unrelated teams.
+
+Teammates should not create separate databases for shared history or retrieve a
+token from their own unrelated installation. Use the running host's endpoint and
+token. The Vercel website hosts documentation and downloads; run the MCP service
+separately. Do not share a live SQLite file through a network drive.
