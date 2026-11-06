@@ -34,7 +34,7 @@ export const operations = {
 };
 
 export function buildServer(store) {
-  const server = new McpServer({ name: 'agent-context-mcp', version: VERSION }, { instructions: INSTRUCTIONS });
+  const server = new McpServer({ name: 'agent-context', version: VERSION }, { instructions: INSTRUCTIONS });
   for (const [name, operation] of Object.entries(operations)) {
     server.registerTool(name, {
       description: operation.description, inputSchema: operation.schema,

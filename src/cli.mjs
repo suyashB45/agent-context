@@ -9,7 +9,7 @@ import { createApplication, nodeServer } from './http.mjs';
 
 const HELP = `Agent Context ${VERSION}
 
-Usage: agent-context-mcp [dashboard|stdio|config|token|keygen|check|backup] [options]
+Usage: agent-context [dashboard|stdio|config|token|keygen|check|backup] [options]
 
   dashboard    Start the React dashboard and HTTP MCP service (default)
   stdio        Start an MCP subprocess for coding agents; also --mcp
@@ -102,6 +102,6 @@ export async function main(argv = process.argv.slice(2)) {
   });
   server.listen(app.config.port, app.config.host, () => {
     const host = app.config.host.includes(':') ? `[${app.config.host}]` : app.config.host;
-    process.stderr.write(`Agent Context ${VERSION}\nDashboard: http://${host}:${app.config.port}/dashboard\nMCP endpoint: http://${host}:${app.config.port}/mcp\nShow the access token with: agent-context-mcp token --db ${JSON.stringify(database)}\n`);
+    process.stderr.write(`Agent Context ${VERSION}\nDashboard: http://${host}:${app.config.port}/dashboard\nMCP endpoint: http://${host}:${app.config.port}/mcp\nShow the access token with: agent-context token --db ${JSON.stringify(database)}\n`);
   });
 }

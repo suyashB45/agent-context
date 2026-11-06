@@ -12,7 +12,7 @@ test('client configurations preserve space-containing paths as a single argument
     const config = clientConfiguration({ client: id, database });
     const server = (id === 'vscode' ? config.servers : config.mcpServers)['agent-context'];
     assert.deepEqual(server.args, ['stdio', '--db', database]);
-    assert.equal(server.command, 'agent-context-mcp');
+    assert.equal(server.command, 'agent-context');
     if (id === 'vscode') assert.equal(server.type, 'stdio');
   }
   assert.throws(() => clientConfiguration({ client: 'unknown', database }), /Unknown client/);

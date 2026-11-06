@@ -2,7 +2,7 @@
   "servers": {
     "agent-context": {
       "type": "stdio",
-      "command": "agent-context-mcp",
+      "command": "agent-context",
       "args": [
         "stdio",
         "--db",

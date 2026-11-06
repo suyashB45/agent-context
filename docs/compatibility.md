@@ -13,6 +13,10 @@ connect by itself. Enable or approve the tools according to your client's policy
 | macOS | Node.js 24+, npm, writable local data directory | Designed for it; CI configured, results not verified here |
 | Windows | Node.js 24+, npm, writable local data directory | Designed for it; CI configured, results not verified here |
 
+The Node.js 24 baseline uses built-in SQLite and the tested Node test runner.
+Node.js 18 and 20 do not provide this storage API; lowering the baseline needs
+a storage implementation change and compatibility testing.
+
 Python and native dependency compilation are not required for the npm package.
 Your model's RAM, GPU, and storage requirements are separate. Mobile apps and
 arbitrary embedded systems are not advertised as supported server targets.

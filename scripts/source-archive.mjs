@@ -1,3 +1,4 @@
+import { releaseBasename } from '../src/release-files.mjs';
 import { createReadStream, createWriteStream, existsSync } from 'node:fs';
 import { lstat, mkdir, readFile, readdir, rename } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
@@ -9,7 +10,7 @@ import { createGzip } from 'node:zlib';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
-const prefix = `${pkg.name.replaceAll('/', '-')}-${pkg.version}`;
+const prefix = releaseBasename(pkg.name, pkg.version);
 const destination = join(root, 'dist/release', `${prefix}-source.tar.gz`);
 const files = [];
 const topFiles = ['vercel.json', 'package.json', 'package-lock.json', 'README.md', 'LICENSE', 'SECURITY.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'CODE_OF_CONDUCT.md', 'ROADMAP.md', 'Dockerfile', 'compose.yaml', '.env.example', '.gitignore', '.dockerignore', 'pyproject.toml', 'MANIFEST.in', 'constraints.txt', 'site/config.json', 'site/.gitignore'];

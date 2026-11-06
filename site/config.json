@@ -1,10 +1,10 @@
 {
   "productName": "Agent Context",
-  "packageName": "agent-context-mcp",
+  "packageName": "@suyashb/agent-context",
   "version": "0.4.0",
   "npmPublished": false,
   "repositoryUrl": "https://github.com/suyashB45/agent-context",
-  "origin": null,
+  "origin": "https://agentcontext.suyashb.me",
   "profileLinks": [
     {
       "label": "Website",
@@ -23,5 +23,6 @@
       "url": "mailto:suyashbalasubramaniam@gmail.com"
     }
   ],
-  "creatorName": "Suyash Balasubramaniam"
+  "creatorName": "Suyash Balasubramaniam",
+  "cliName": "agent-context"
 }

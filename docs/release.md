@@ -8,8 +8,9 @@ Do not announce installation commands or deployment URLs until verified.
 
 Use Node.js 24+, npm, Git, and accounts with rights to the intended GitHub,
 npm, and Vercel destinations. The configured repository is
-https://github.com/suyashB45/agent-context. Package-name ownership still needs
-registry verification before first publication.
+https://github.com/suyashB45/agent-context. The npm account confirmed for publication is `suyashb`, so the package uses
+`@suyashb/agent-context`. The unscoped `agent-context-mcp` package belongs to
+another maintainer and is not this project. Verify the scoped name before publishing.
 
 For a version change, update `package.json`, the root entries in
 `package-lock.json`, `site/config.json`, `VERSION` in `src/config.mjs`, the
@@ -49,8 +50,8 @@ The generated files for this version are:
 
 | Artifact | Location |
 | --- | --- |
-| npm package | `dist/npm/agent-context-mcp-0.4.0.tgz` |
-| source archive | `dist/release/agent-context-mcp-0.4.0-source.tar.gz` |
+| npm package | `dist/npm/suyashb-agent-context-0.4.0.tgz` |
+| source archive | `dist/release/suyashb-agent-context-0.4.0-source.tar.gz` |
 | product website | `site/dist/` |
 | download sizes and SHA-256 digests | `site/dist/downloads/release.json` |
 
@@ -76,15 +77,15 @@ website settings.
 
 ```bash
 npm whoami
-npm publish ./dist/npm/agent-context-mcp-0.4.0.tgz --access public
+npm publish ./dist/npm/suyashb-agent-context-0.4.0.tgz --access public
 ```
 
 After the registry confirms publication, verify the exact version:
 
 ```bash
-npm view agent-context-mcp@0.4.0 version
-npm install -g agent-context-mcp@0.4.0
-agent-context-mcp --version
+npm view @suyashb/agent-context@0.4.0 version
+npm install -g @suyashb/agent-context@0.4.0
+agent-context --version
 ```
 
 Verify a fresh install outside the source directory and an actual MCP handoff.
@@ -118,8 +119,8 @@ actually downloaded from that site. If deployment protection limits access,
 configure the intended public audience before announcing a public launch.
 
 Vercel serves product docs and downloads. Users run the persistent SQLite MCP
-service on their own computers or servers. `site:serve` is a local preview,
-not a production start command for Vercel.
+service on their own computers or servers. Users visit the official website;
+its build output is deployed by Vercel.
 
 ## 6. Connect a custom domain
 
@@ -143,14 +144,9 @@ that agents must record their work, and that each instance is one trusted team.
 Link the install guide, team guide, release notes, issues, and security contact.
 Distinguish tested combinations from planned support.
 
-For local website review at any point:
-
-```bash
-npm run vercel:build
-npm run site:serve
-```
-
-Open http://127.0.0.1:8770. The MCP dashboard is a separate service on port 8765.
+The official product website is https://agentcontext.suyashb.me. Users visit it
+in their browser; they only run the MCP service/dashboard locally. Optional
+website development preview instructions belong in [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ## Automated live launch verification
 

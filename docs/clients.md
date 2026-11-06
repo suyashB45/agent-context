@@ -10,10 +10,10 @@ approving or enabling server tools.
 Install the downloadable npm package first. Generate JSON for your client:
 
 ```bash
-agent-context-mcp config --client generic --db /absolute/path/to/shared/context.sqlite3
-agent-context-mcp config --client cursor --db /absolute/path/to/shared/context.sqlite3
-agent-context-mcp config --client vscode --db /absolute/path/to/shared/context.sqlite3
-agent-context-mcp config --client gemini --db /absolute/path/to/shared/context.sqlite3
+agent-context config --client generic --db /absolute/path/to/shared/context.sqlite3
+agent-context config --client cursor --db /absolute/path/to/shared/context.sqlite3
+agent-context config --client vscode --db /absolute/path/to/shared/context.sqlite3
+agent-context config --client gemini --db /absolute/path/to/shared/context.sqlite3
 ```
 
 The command prints configuration only. It does not change client files or
@@ -28,7 +28,7 @@ Without `--db`, it uses the same default database selection as the server.
 | Other clients | Use the MCP server editor or adapt the generic JSON wrapper |
 
 Use the client’s own configuration editor for Cline, Roo Code, Windsurf, or
-another integration; provide command `agent-context-mcp` and arguments
+another integration; provide command `agent-context` and arguments
 `stdio`, `--db`, and the same absolute database filename as separate arguments.
 The generic JSON is a common format, not a guarantee that every client uses
 the same wrapper. Keep any existing settings.
@@ -39,7 +39,7 @@ needed for stdio. Use the same `--db` when starting the dashboard.
 
 The executable must be available to your editor, which may have a different
 PATH from your terminal. Use the installed executable’s absolute path if needed.
-Do not launch `agent-context-mcp` without `stdio` from an MCP client: the default
+Do not launch `agent-context` without `stdio` from an MCP client: the default
 command starts the HTTP service. Enable the server’s tools and start a fresh
 agent session after setup.
 

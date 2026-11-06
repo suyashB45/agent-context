@@ -11,13 +11,13 @@ Find the host computer's private IP. Replace 192.168.1.50 below with that IP.
 Stop any existing service on port 8765, then run on the host:
 
 ```bash
-agent-context-mcp --host 0.0.0.0 --port 8765 --db ./data/context.sqlite3 --allowed-host 192.168.1.50:8765 --allowed-origin http://192.168.1.50:8765
+agent-context --host 0.0.0.0 --port 8765 --db ./data/context.sqlite3 --allowed-host 192.168.1.50:8765 --allowed-origin http://192.168.1.50:8765
 ```
 
 In a second host terminal, from the same directory:
 
 ```bash
-agent-context-mcp token --db ./data/context.sqlite3
+agent-context token --db ./data/context.sqlite3
 ```
 
 Teammates use `http://192.168.1.50:8765/mcp`, transport Streamable HTTP, and
@@ -37,7 +37,7 @@ Connect the host and teammates to an authorized private VPN such as Tailscale.
 For Tailscale Serve, use the host's real HTTPS hostname instead of this example:
 
 ```bash
-agent-context-mcp --host 127.0.0.1 --db ./data/context.sqlite3 --allowed-host machine.tailnet-name.ts.net --allowed-origin https://machine.tailnet-name.ts.net
+agent-context --host 127.0.0.1 --db ./data/context.sqlite3 --allowed-host machine.tailnet-name.ts.net --allowed-origin https://machine.tailnet-name.ts.net
 ```
 
 In a second host terminal:
@@ -59,7 +59,7 @@ Reference: https://tailscale.com/docs/reference/tailscale-cli/serve
 On the host, keep the application on loopback:
 
 ```bash
-agent-context-mcp --host 127.0.0.1 --db ./data/context.sqlite3
+agent-context --host 127.0.0.1 --db ./data/context.sqlite3
 ```
 
 On each teammate's computer with SSH installed and host access configured:
@@ -78,7 +78,7 @@ Run the application on loopback on a persistent server with a TLS reverse
 proxy. Set the exact domain in both allowlists:
 
 ```bash
-agent-context-mcp --host 127.0.0.1 --db ./data/context.sqlite3 --allowed-host context.example.com --allowed-origin https://context.example.com
+agent-context --host 127.0.0.1 --db ./data/context.sqlite3 --allowed-host context.example.com --allowed-origin https://context.example.com
 ```
 
 The reverse proxy forwards HTTPS requests to `127.0.0.1:8765`. Teammates use

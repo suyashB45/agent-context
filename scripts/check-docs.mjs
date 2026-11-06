@@ -1,3 +1,4 @@
+import { releaseBasename } from '../src/release-files.mjs';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -40,8 +41,8 @@ for (const file of files) {
     checked++;
   }
   if (!file.endsWith('legacy-python.md') && file !== 'CHANGELOG.md') {
-    for (const match of text.matchAll(/agent-context-mcp-(\d+\.\d+\.\d+)\.tgz/g)) {
-      if (match[1] !== pkg.version) errors.push(`${file}: outdated package filename ${match[0]}`);
+    for (const match of text.matchAll(/(?:suyashb-)?agent-context(?:-mcp)?-(\d+\.\d+\.\d+)\.tgz/g)) {
+      if (match[0] !== `${releaseBasename(pkg.name, pkg.version)}.tgz`) errors.push(`${file}: outdated package filename ${match[0]}`);
     }
   }
 }

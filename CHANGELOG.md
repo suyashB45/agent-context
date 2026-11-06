@@ -2,6 +2,11 @@
 
 ## 0.4.0
 
+- Use npm package `@suyashb/agent-context` and executable `agent-context` to
+  avoid the occupied unscoped name and the historical Python command.
+- Normalize scoped release filenames and link users to the public website;
+  keep website preview instructions in the contributor workflow.
+
 - Correct container smoke-test allowlists for the actual published port instead
   of relying on a Host header override; retain startup diagnostics on failure.
 - Update GitHub Actions to their Node.js 24 runtime versions.

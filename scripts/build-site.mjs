@@ -1,3 +1,4 @@
+import { releaseBasename } from '../src/release-files.mjs';
 import { build } from 'esbuild';
 import { createElement } from 'react';
 import { renderToString } from 'react-dom/server';
@@ -17,9 +18,10 @@ for (const link of config.profileLinks || []) {
   const url = new URL(link.url);
   if (!['https:', 'http:', 'mailto:'].includes(url.protocol) || url.username || url.password) throw new Error('Profile links must use http(s) or mailto without credentials.');
 }
+const archive = releaseBasename(pkg.name, pkg.version);
 const files = [
-  { path: `dist/npm/${pkg.name}-${pkg.version}.tgz`, kind: 'npm' },
-  { path: `dist/release/${pkg.name}-${pkg.version}-source.tar.gz`, kind: 'source' },
+  { path: `dist/npm/${archive}.tgz`, kind: 'npm' },
+  { path: `dist/release/${archive}-source.tar.gz`, kind: 'source' },
 ];
 for (const item of files) await stat(item.path).catch(() => { throw new Error(`Prepare ${item.path} before building the public download site.`); });
 await rm('site/dist', { recursive: true, force: true });

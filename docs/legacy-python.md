@@ -1,6 +1,7 @@
 > Historical Python prototype. New installations should follow the Node.js/React
 > [quick start](../README.md). Do not install both executables into the same active
-> PATH without choosing which one to run. This guide does not describe the active
+> environment without choosing which one to run. The active npm CLI is
+> `agent-context`; this prototype uses `agent-context-mcp`. This guide does not describe the active
 > npm package or its React dashboard.
 
 # Agent Context MCP

@@ -31,3 +31,15 @@ This roadmap describes planned work, not currently shipped capabilities.
 
 The core remains self-hosted project context through MCP. Provider routing and
 hosted multi-tenant accounts are outside the current product scope.
+
+## Priorities after the scoped launch
+
+- Publish `@suyashb/agent-context`; do not use the occupied unscoped name.
+- Demonstrate two real clients handing off a feature and compare that workflow
+  with shared Markdown. Publish measured results rather than performance claims.
+- Explore opt-in lifecycle checkpoints with clear limits for crashes and clients
+  that do not expose hooks; do not claim automatic capture until implemented.
+- Design per-client identity, revocation, and permissions before advertising
+  separate user access. Document migration and storage boundaries.
+- Evaluate optional file-path claims, conflict visibility, and richer retrieval.
+  File claims alone must not be described as filesystem locks.

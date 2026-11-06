@@ -5,6 +5,7 @@ Run it on your own computer or a team server, with a React dashboard and local
 SQLite storage. One agent records the work; the next reads the context before
 continuing.
 
+[Website](https://agentcontext.suyashb.me) ·
 [Source](https://github.com/suyashB45/agent-context) ·
 [Documentation](docs/README.md) · [Contributing](CONTRIBUTING.md) ·
 [MIT license](LICENSE)
@@ -21,22 +22,29 @@ Requires **Node.js 24+ and npm**. Python, a cloud model, and a model API key are
 not required by Agent Context. Your chosen coding agent or model may have its
 own requirements. See [compatibility](docs/compatibility.md).
 
+The npm package is **`@suyashb/agent-context`** and its CLI is **`agent-context`**.
+The unscoped npm package `agent-context-mcp` belongs to another maintainer; it is
+not this project. Once our scoped release is published, install it with
+`npm install -g @suyashb/agent-context`. Until then, use the downloadable package
+or source instructions below.
+
 ## Quick start: downloaded npm package
 
-Download `agent-context-mcp-0.4.0.tgz` from the product website when available,
-or obtain the reviewed artifact from the maintainer. Open a terminal in the
+Download `suyashb-agent-context-0.4.0.tgz` from the
+[official website](https://agentcontext.suyashb.me) after the renamed release is
+deployed, or build it from this source checkout. Open a terminal in the
 folder containing that file, then:
 
 ```bash
-npm install -g ./agent-context-mcp-0.4.0.tgz
-agent-context-mcp
+npm install -g ./suyashb-agent-context-0.4.0.tgz
+agent-context
 ```
 
 Open **http://127.0.0.1:8765/dashboard**. Keep the service terminal open. In a
 second terminal, retrieve the login token:
 
 ```bash
-agent-context-mcp token
+agent-context token
 ```
 
 Paste the token into the dashboard, create a project, and open **Connect agents**.
@@ -56,7 +64,7 @@ npm start -- --db ./data/dev.sqlite3
 In another terminal, from the same directory:
 
 ```bash
-node bin/agent-context-mcp.mjs token --db ./data/dev.sqlite3
+node bin/agent-context.mjs token --db ./data/dev.sqlite3
 ```
 
 This runs the Node/React application without a global install. Generated
@@ -65,7 +73,7 @@ shareable npm package after `npm run build`:
 
 ```bash
 npm pack --ignore-scripts --pack-destination dist/npm
-npm install -g ./dist/npm/agent-context-mcp-0.4.0.tgz
+npm install -g ./dist/npm/suyashb-agent-context-0.4.0.tgz
 ```
 
 The downloaded-package path and source-checkout path differ. An `ENOENT` error
@@ -82,7 +90,7 @@ For local agents, generate configuration with the same absolute database path
 used by the dashboard:
 
 ```bash
-agent-context-mcp config --client generic --db /absolute/path/to/shared/context.sqlite3
+agent-context config --client generic --db /absolute/path/to/shared/context.sqlite3
 ```
 
 Use `--client cursor`, `--client vscode`, or `--client gemini` for those formats.
@@ -90,7 +98,9 @@ Merge the printed entry into existing settings; the command does not edit files.
 Enable the server tools and start a fresh agent session. The dashboard generates
 JSON using its actual database path.
 
-Each local stdio client starts `agent-context-mcp stdio`; no HTTP token is needed.
+Each local stdio client starts `agent-context stdio`; no HTTP token is needed.
+For this agent-only setup, you do not need a separate running HTTP service or
+dashboard. Start the local dashboard only when you want to inspect the history.
 For remote clients, use the running host's endpoint and token. See [client setup](docs/clients.md).
 
 ## Make handoffs part of the workflow
@@ -157,19 +167,16 @@ Use separate instances for unrelated trust groups. See [SECURITY.md](SECURITY.md
 | Publish npm and deploy the website | [Maintainer release guide](docs/release.md) |
 | Understand the implementation | [Architecture](docs/architecture.md) |
 
-The public website serves docs and package/source downloads. The local dashboard
-runs at port **8765**; the website preview runs at **8770**. They are separate.
-To build the website and its downloadable artifacts from source:
+## Website and local application
 
-```bash
-npm run vercel:build
-npm run site:serve
-```
+Visit **https://agentcontext.suyashb.me** for the product website, documentation,
+and downloads. Users do not run the product website on their computer.
 
-Import the repository root into Vercel, choose **Other**, use Node.js **24.x**,
-build command `npm run vercel:build`, and output directory `site/dist`.
-The included `vercel.json` declares these build settings. Domain/DNS setup and
-npm publication are separate steps in the release guide.
+The `agent-context` command starts your **local MCP service and React dashboard**
+at http://127.0.0.1:8765/dashboard. This is the application that stores your
+project context. The public website and local dashboard serve different purposes.
+Website deployment is covered in the [maintainer guide](docs/release.md); optional
+website development preview is covered in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Contribute and get help
 
@@ -179,8 +186,8 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md), [community expectations](CODE_OF_CONDUC
 and [the roadmap](ROADMAP.md). Report vulnerabilities privately as described in
 [SECURITY.md](SECURITY.md).
 
-The earlier Python prototype remains in the source repository for compatibility
-and historical reference. It is not the active npm product. Its command uses
-the same executable name; deactivate the Python virtual environment or use the
-Node CLI's absolute path to avoid selecting it accidentally. See the
+The earlier Python prototype remains in the source repository as historical
+reference. Its executable is `agent-context-mcp`; the Node release uses
+`agent-context`, so the commands are distinct. Keep the same explicit `--db`
+when migrating an existing database. See the
 [legacy Python guide](https://github.com/suyashB45/agent-context/blob/main/docs/legacy-python.md).

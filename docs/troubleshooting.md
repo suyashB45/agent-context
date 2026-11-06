@@ -1,7 +1,7 @@
 # Troubleshooting
 
 Start with `node --version`, `npm --version`, and
-`agent-context-mcp --version`. Report these with your OS, install method,
+`agent-context --version`. Report these with your OS, install method,
 reproduction steps, and the first relevant error in
 [GitHub issues](https://github.com/suyashB45/agent-context/issues).
 Remove credentials and private project content from reports.
@@ -14,7 +14,7 @@ warning does not prove the archive is corrupt.
 For a downloaded file, open a terminal in the folder containing it:
 
 ```bash
-npm install -g ./agent-context-mcp-0.4.0.tgz
+npm install -g ./suyashb-agent-context-0.4.0.tgz
 ```
 
 For a source checkout, generate the ignored build artifacts first:
@@ -23,7 +23,7 @@ For a source checkout, generate the ignored build artifacts first:
 npm ci
 npm run build
 npm pack --ignore-scripts --pack-destination dist/npm
-npm install -g ./dist/npm/agent-context-mcp-0.4.0.tgz
+npm install -g ./dist/npm/suyashb-agent-context-0.4.0.tgz
 ```
 
 If a downloaded file really is incomplete, download it again and compare its
@@ -39,11 +39,12 @@ path if needed. On Windows, account for the npm command shim as required by your
 client. If global installation fails with permissions errors, use a user-owned
 Node/npm installation rather than changing application data ownership blindly.
 
-The retained Python prototype has the same command name. Deactivate its virtual
-environment. From source, select Node explicitly:
+The retained Python prototype uses `agent-context-mcp`. The new Node command is
+`agent-context`, provided by npm package `@suyashb/agent-context`. From source,
+select the Node launcher explicitly:
 
 ```bash
-node bin/agent-context-mcp.mjs --version
+node bin/agent-context.mjs --version
 ```
 
 Build first if `build/npm/cli.mjs` is missing.
@@ -102,8 +103,9 @@ Import the entire repository with Root Directory `./`, preset **Other**, Node
 than only the final non-zero exit message. Ensure the deployed Git commit
 contains the current package and matching site configuration.
 
-`npm run site:serve` is only a local preview. Vercel hosts the product website,
-not the persistent SQLite MCP instance. See [release and deployment](release.md).
+The official product website is https://agentcontext.suyashb.me. Users run only
+the MCP service/dashboard locally. Vercel hosts the product website, not the
+persistent SQLite MCP instance. See [release and deployment](release.md).
 
 ## Restricted development environment
 

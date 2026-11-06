@@ -41,7 +41,7 @@ async function exchange(port, write) {
 }
 const address = containerAddress(await availableContainerPort());
 try {
-  docker(['run', '-d', '--name', name, '--env', 'AGENT_CONTEXT_TOKEN', '--read-only', '--tmpfs', '/tmp:rw,noexec,nosuid,size=32m', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true', '--publish', address.publish, '--volume', `${volume}:/data`, 'agent-context-mcp:ci', ...address.serverArguments]);
+  docker(['run', '-d', '--name', name, '--env', 'AGENT_CONTEXT_TOKEN', '--read-only', '--tmpfs', '/tmp:rw,noexec,nosuid,size=32m', '--cap-drop', 'ALL', '--security-opt', 'no-new-privileges:true', '--publish', address.publish, '--volume', `${volume}:/data`, 'agent-context:ci', ...address.serverArguments]);
   const port = Number(address.host.split(':').at(-1));
   console.log(`Testing container through ${address.origin}`);
   await healthy(port); await exchange(port, true);

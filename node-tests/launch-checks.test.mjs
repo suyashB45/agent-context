@@ -9,7 +9,7 @@ function fixture(options = {}) {
   const npm = Buffer.from('reviewed npm archive'), source = Buffer.from('source archive');
   const registry = options.registryBytes || npm;
   let installs = 0;
-  const params = { site, repository: 'owner/project', packageName: 'agent-context-mcp', version: '0.4.0',
+  const params = { site, repository: 'owner/project', packageName: '@suyashb/agent-context', version: '0.4.0',
     installPackage: async (bytes) => { installs++; assert.deepEqual(bytes, npm); return 'temporary install checked'; },
     fetchImpl: async (input) => {
       if (options.networkError) throw new Error('offline', { cause: { code: 'EAI_AGAIN' } });

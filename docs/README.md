@@ -26,10 +26,10 @@ ID and the host's token. Separate databases do not share history automatically.
 
 ## Product website and local dashboard
 
-The product website contains docs and downloadable releases. It does not store
-your team context. `npm run site:serve` previews it at port 8770 after a website
-build. The installed MCP server serves its dashboard at port 8765 and owns your
-SQLite database. Deploying the product website does not deploy that server.
+Visit https://agentcontext.suyashb.me for product documentation and downloads.
+Users do not need to run the product website locally. The installed `agent-context`
+command runs the MCP service and its dashboard at port 8765, and stores your
+SQLite database. Deploying the website does not deploy your MCP instance.
 
 ## Reading examples
 

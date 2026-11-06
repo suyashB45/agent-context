@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "agent-context": {
-      "command": "agent-context-mcp",
+      "command": "agent-context",
       "args": [
         "stdio",
         "--db",

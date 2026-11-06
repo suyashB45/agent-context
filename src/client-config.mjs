@@ -9,7 +9,7 @@ export const CLIENT_PROFILES = [
 export function clientConfiguration({ client = 'generic', database }) {
   if (!CLIENT_PROFILES.some((profile) => profile.id === client)) throw new Error('Unknown client. Choose generic, cursor, vscode, or gemini.');
   if (typeof database !== 'string' || !database.trim()) throw new Error('A shared database path is required.');
-  const server = { command: 'agent-context-mcp', args: ['stdio', '--db', database] };
+  const server = { command: 'agent-context', args: ['stdio', '--db', database] };
   return client === 'vscode' ? { servers: { 'agent-context': { type: 'stdio', ...server } } }
     : { mcpServers: { 'agent-context': server } };
 }

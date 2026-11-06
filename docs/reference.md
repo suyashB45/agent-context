@@ -40,7 +40,7 @@ and a `resume_project` prompt.
 | `check` | Check an existing database for integrity |
 | `backup` | Back up an existing database to the new `--output` file |
 
-Run `agent-context-mcp --help` for the complete options list. `--db` selects the
+Run `agent-context --help` for the complete options list. `--db` selects the
 SQLite file. `--host` and `--port` control HTTP binding. Repeat `--allowed-host`
 and `--allowed-origin` for each exact additional Host/Origin value.
 

@@ -23,7 +23,7 @@ npm start -- --db ./data/dev.sqlite3
 Open http://127.0.0.1:8765/dashboard. In a second terminal from the same directory:
 
 ```bash
-node bin/agent-context-mcp.mjs token --db ./data/dev.sqlite3
+node bin/agent-context.mjs token --db ./data/dev.sqlite3
 ```
 
 Use development data. Stop with Ctrl+C. No Python environment or global package
@@ -57,8 +57,8 @@ branch and update documentation when behavior or options change.
 | Container | Build Docker image and run `node scripts/test-container.mjs` as CI does |
 
 The package verification command expects the tarball prepared by
-`npm run vercel:build`. Container verification uses the `agent-context-mcp:ci`
-image; build it with `docker build -t agent-context-mcp:ci .` first.
+`npm run vercel:build`. Container verification uses the `agent-context:ci`
+image; build it with `docker build -t agent-context:ci .` first.
 
 If subprocess descriptors are blocked, the POSIX command
 `AGENT_CONTEXT_SKIP_SUBPROCESS_TESTS=1 npm test` skips two subprocess tests.
