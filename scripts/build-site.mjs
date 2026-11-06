@@ -12,6 +12,11 @@ const pkg = JSON.parse(await readFile('package.json', 'utf8'));
 const config = JSON.parse(await readFile('site/config.json', 'utf8'));
 if (pkg.version !== config.version || pkg.name !== config.packageName) throw new Error('Update site/config.json to match the actual package release.');
 if (config.repositoryUrl && !/^https:\/\/github\.com\/[^/]+\/[^/]+\/?$/.test(config.repositoryUrl)) throw new Error('Use a verified GitHub repository URL or null.');
+for (const link of config.profileLinks || []) {
+  if (!link || typeof link.label !== 'string' || !link.label.trim() || typeof link.url !== 'string') throw new Error('Profile links require a label and URL.');
+  const url = new URL(link.url);
+  if (!['https:', 'http:', 'mailto:'].includes(url.protocol) || url.username || url.password) throw new Error('Profile links must use http(s) or mailto without credentials.');
+}
 const files = [
   { path: `dist/npm/${pkg.name}-${pkg.version}.tgz`, kind: 'npm' },
   { path: `dist/release/${pkg.name}-${pkg.version}-source.tar.gz`, kind: 'source' },

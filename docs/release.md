@@ -76,3 +76,11 @@ npm run site:serve
 Verify the actual deployment URL, documentation links, and both downloads
 before announcing the website. Publish npm separately; website deployment does
 not publish a package to the npm registry.
+
+## Website links
+
+`site/config.json` holds the public GitHub repository URL and optional profile
+links. Add your verified personal website, LinkedIn, or other profiles under
+`profileLinks`, each with a `label` and `url`, then rebuild and deploy. Empty
+lists hide profile links. Set `origin` or production `SITE_URL` to the public
+Agent Context website origin once its domain is known.

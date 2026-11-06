@@ -5,6 +5,7 @@ const npmFile = `${config.packageName}-${config.version}.tgz`;
 const sourceFile = `${config.packageName}-${config.version}-source.tar.gz`;
 const install = config.npmPublished ? `npm install -g ${config.packageName}` : `npm install -g ./${npmFile}`;
 const sourceUrl = config.repositoryUrl || `/downloads/${sourceFile}`;
+const profileLinks = config.profileLinks || [];
 const instructions = 'Use agent-context MCP for project ID "my-project".\nRead get_context and list_tasks before working.\nUse a unique agent_id and claim your task.\nRecord progress, changed files, decisions, and test results.\nBefore stopping, write a handoff and complete or release your task.';
 
 function Logo() {
@@ -12,7 +13,7 @@ function Logo() {
 }
 function Arrow({ diagonal = false }) { return <span aria-hidden="true">{diagonal ? '↗' : '→'}</span>; }
 function Header({ docs = false }) {
-  return <header className="site-header"><div className="container header-inner"><Logo /><nav aria-label="Main navigation"><a href={docs ? '/#product' : '#product'}>Product</a><a href={docs ? '/#how-it-works' : '#how-it-works'}>How it works</a><a href="/docs/">Docs</a><a href={docs ? '/#open-source' : '#open-source'}>Open source</a></nav><a className="site-button small secondary" href={`/downloads/${npmFile}`} download>Download <Arrow diagonal /></a></div></header>;
+  return <header className="site-header"><div className="container header-inner"><Logo /><nav aria-label="Main navigation"><a href={docs ? '/#product' : '#product'}>Product</a><a href={docs ? '/#how-it-works' : '#how-it-works'}>How it works</a><a href="/docs/">Docs</a>{config.repositoryUrl && <a href={config.repositoryUrl}>GitHub</a>}<a href={docs ? '/#open-source' : '#open-source'}>Open source</a></nav><a className="site-button small secondary" href={`/downloads/${npmFile}`} download>Download <Arrow diagonal /></a></div></header>;
 }
 export function CopyButton({ text, label = 'Copy' }) {
   const [status, setStatus] = useState('');
@@ -51,7 +52,7 @@ function InstallSteps() {
 }
 
 function Footer() {
-  return <footer className="site-footer"><div className="container footer-main"><div><Logo /><p>Continuity for the way you build.</p></div><div className="footer-links"><a href="/docs/">Documentation</a><a href={sourceUrl}>Source code</a><a href="/docs/contributing/">Contribute</a><a href="/docs/LICENSE.txt">MIT license</a></div><span className="footer-note">Self-hosted. Open source.<br />Made for shared understanding.</span></div><div className="container footer-bottom"><span>Agent Context · v{config.version}</span><a href="/downloads/release.json">Release checksums <Arrow diagonal /></a></div></footer>;
+  return <footer className="site-footer"><div className="container footer-main"><div><Logo /><p>Continuity for the way you build.</p></div><div className="footer-links"><a href="/docs/">Documentation</a><a href={sourceUrl}>{config.repositoryUrl ? 'GitHub' : 'Source code'}</a><a href="/docs/contributing/">Contribute</a><a href="/docs/LICENSE.txt">MIT license</a>{profileLinks.map(({ label, url }) => <a href={url} key={url}>{label}</a>)}</div><span className="footer-note">Self-hosted. Open source.<br />Made for shared understanding.</span></div><div className="container footer-bottom"><span>Agent Context · v{config.version}</span><a href="/downloads/release.json">Release checksums <Arrow diagonal /></a></div></footer>;
 }
 
 export function LandingPage() {

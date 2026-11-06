@@ -57,5 +57,12 @@
     "self-hosted",
     "claude",
     "codex"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/suyashB45/agent-context.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suyashB45/agent-context/issues"
+  }
 }
