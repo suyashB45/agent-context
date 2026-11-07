@@ -1,5 +1,6 @@
 import './globals.css';
 import './identity.css';
+import { Analytics } from '@vercel/analytics/next';
 import { landingMeta, siteBrand } from '../site/src/content.js';
 import config from '../site/config.json';
 
@@ -15,5 +16,5 @@ export const metadata = {
 export const viewport = { width: 'device-width', initialScale: 1, themeColor: landingMeta.themeColor };
 const themeScript = `try{document.documentElement.dataset.theme=localStorage.getItem('agent-context-theme')==='light'?'light':'dark'}catch{}`;
 export default function RootLayout({ children }) {
-  return <html lang="en" data-theme="dark" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body><div id="root">{children}</div></body></html>;
+  return <html lang="en" data-theme="dark" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head><body><div id="root">{children}</div><Analytics /></body></html>;
 }
