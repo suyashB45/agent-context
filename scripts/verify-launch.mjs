@@ -19,7 +19,7 @@ const report = await checkLaunch({ site: site.origin, repository, version: pkg.v
     try {
       const tarball = join(temporary, 'package.tgz'); await writeFile(tarball, data);
       const result = spawnSync(process.execPath, [resolve('scripts/verify-package.mjs'), tarball], { encoding: 'utf8', timeout: 60000 });
-      if (result.error || result.status !== 0 || !result.stdout.includes('Clean offline global npm install')) {
+      if (result.error || result.status !== 0 || !result.stdout.includes('Clean global npm install')) {
         const failure = new Error('Downloaded package installation could not be verified: ' + (result.error?.message || result.stderr || 'no successful verification output'));
         failure.status = result.error || result.status === null || result.status === 0 ? 'blocked' : 'fail';
         throw failure;

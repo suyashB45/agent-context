@@ -35,8 +35,9 @@ npm run test:package
 
 `npm run build` builds the runtime, packages the installable archive, exports
 allowlisted source, builds the website, and checks its pages/downloads.
-`test:package` performs a clean offline installation of the prepared tarball.
-It requires working subprocess descriptors. Do not silently skip failures.
+`test:package` performs a clean installation of the prepared tarball in an
+isolated prefix. It requires registry access for the package's dependencies and
+working subprocess descriptors. Do not silently skip failures.
 
 Run the configured GitHub Actions jobs on Linux, macOS, Windows, and Docker.
 Check their actual results. Directly verify at least two different MCP clients
