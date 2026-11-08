@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm ci --offline=false --ignore-scripts --no-audit --no-fund
       - run: npm run build:runtime
       - run: npm run check
       - run: npm run docs:check
@@ -50,7 +50,7 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm ci --offline=false --ignore-scripts --no-audit --no-fund
       - run: docker build -t agent-context:ci .
       - run: node scripts/test-container.mjs
         timeout-minutes: 3
